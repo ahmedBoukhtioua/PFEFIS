@@ -1,1 +1,121 @@
-<p>profile works!</p>
+<div class="content-wrapper"   >
+  <!-- Content Header (Page header) -->
+  <div class="row">
+
+
+    <div class="box" id="parent">
+
+      <!-- /.box-header -->
+      <div class="box-body" id="child-left">
+        <table #dataTable   class="table table-bordered table-striped" align="center" style="width:85% ">
+          <thead>
+          <tr>
+            <th>nom</th>
+            <th>description</th>
+            <th>quantite</th>
+            <th>categorie</th>
+            <th>supprimer</th>
+            <th>modifier</th>
+            <th>proposition</th>
+          </tr>
+          </thead>
+          <tbody></tbody></table>
+          <!--<tr *ngFor="let s of offres" >
+            <td>{{s.name}}</td>
+            <td>{{s.description}}</td>
+            <td>{{s.quantite}}</td>
+            <td>{{s.categorie}}</td>
+            <td><a class="btn btn-danger" (click)="onDelete(s.id_offre)"><div class="fa fa-fw fa-eraser"></div>delete</a></td>
+            <td><a class="btn btn-success" (click)="onEdit(s)"><div class="fa fa-fw fa-edit"></div> Edit</a></td>
+            <td><a class="btn btn-info" (click)="onlistpropo(s)"><div class="fa fa-fw fa-navicon"></div>proposition</a></td>
+          </tr>
+
+          </tbody>
+          <tfoot>
+          <tr>
+            <th>nom</th>
+            <th>description</th>
+            <th>quantite</th>
+            <th>categorie</th>
+            <th>supprimer</th>
+            <th>modifier</th>
+            <th>proposition</th>
+          </tr>
+          </tfoot>
+        </table>
+      </div>-->
+      <!-- /.box-body -->
+     <!-- <div class="col-md-6" id="child-right">
+        <br><br><br><br><br><br><br><br>
+        <div *ngIf="abc===0">
+          <a class="btn btn-success" (click)="createbutton()"> créer offre</a>
+        </div>
+        <div class="box box-primary" *ngIf="abc===1">
+
+
+          <form  *ngIf="!isSuccessful "
+                 name="form"
+                 (ngSubmit)="f.form.valid && onsaveoffre(f.value)"
+                 #f="ngForm"
+                 novalidate>
+            <div class="form-group">
+
+              <label for="username" class="control-label"> Name</label>
+
+              <input id="username" class="form-control"
+                     required
+                     minlength="3"
+                     maxlength="20"
+                     #username="ngModel" type="text" name="name" ngModel [(ngModel)]="offres.name">
+            </div>
+            <div class="alert-danger" *ngIf="f.submitted && username.invalid">
+              <div *ngIf="username.errors.required">Username is required</div>
+              <div *ngIf="username.errors.minlength">
+                Username must be at least 3 characters
+              </div>
+              <div *ngIf="username.errors.maxlength">
+                Username must be at most 20 characters
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="descriptions" > Description</label>
+              <textarea id="descriptions"   #descriptions="ngModel" required
+                        minlength="3"
+                        maxlength="2000" class="form-control" type="text" name="description" ngModel [(ngModel)]="offres.description"></textarea>
+            </div>
+            <div class="alert-danger" *ngIf="f.submitted && descriptions.invalid">
+              <div *ngIf="descriptions.errors.required">description is required</div>
+              <div *ngIf="descriptions.errors.minlength">
+                description must be at least 3 characters
+              </div>
+              <div *ngIf="descriptions.errors.maxlength">
+                description must be at most 2000 characters
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="quantite" class="control-label"> Quantite</label>
+              <input id="quantite" class="form-control"  required type="number" name="quantite" #quantite="ngModel" ngModel [(ngModel)]="offres.quantite">
+            </div>
+            <div class="alert-danger" *ngIf="f.submitted && quantite.invalid">
+              <div *ngIf="quantite.errors.required">quantite is required</div></div>
+            <label>Choisissez une categorie</label>
+            <select  [(ngModel)]="categorie" name="categorie" (change)="selected()">
+              <option *ngFor="let food of equipes" [value]="food.value"  >
+                {{food.viewValue}}
+              </option>
+            </select>
+
+
+            <div class="box-footer">
+              <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+ -->
+
+
+</div></div> </div> </div>

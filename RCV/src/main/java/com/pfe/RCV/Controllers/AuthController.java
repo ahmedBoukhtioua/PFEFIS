@@ -45,6 +45,16 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    private static JwtResponse connectedUser;
+
+    public static JwtResponse getConnectedUser() {
+        return connectedUser;
+    }
+
+    public static void setConnectedUser(JwtResponse connectedUser) {
+        AuthController.connectedUser = connectedUser;
+    }
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -119,5 +129,10 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @GetMapping(value = "/user/{id}" )
+    public User user(@PathVariable(name = "id") String id ) {
+        return userRepository.findById(id).get();
     }
 }

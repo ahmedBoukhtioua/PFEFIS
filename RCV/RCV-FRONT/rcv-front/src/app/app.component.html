@@ -8,6 +8,13 @@
       <li class="nav-item">
         <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
       </li>
+      <li class="nav-item">
+        <a href="/addJobOffer" class="nav-link"  routerLink="addJobOffer"> add jobOffer</a>
+      </li>
+      <li class="nav-item">
+        <a href="/listJobOffer" class="nav-link"  routerLink="listJobOffer"> get jobOffer</a>
+      </li>
+
     </ul>
 
     <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">

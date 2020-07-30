@@ -1,0 +1,69 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Ajouter des offres d'emploi</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a href="#" onClick="return false;">Offres d'emploi</a>
+            </li>
+            <li class="breadcrumb-item active">Ajout</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+        <div class="card">
+          <div class="header">
+            <h2>
+              <strong>Ajouter</strong> des offres d'emploi</h2>
+          </div>
+
+
+          <div class="modal-body">
+            <form>
+              <label>Nom de l'offre</label>
+              <div class="form-group">
+                <div class="form-line">
+                  <input type="text" name="project_name" [(ngModel)]="jobOffer.projectName" class="form-control"
+                         placeholder="">
+                </div>
+              </div>
+              <label>Description de l'offre</label>
+              <div class="form-group">
+                <div class="form-line">
+                  <input type="text" name="project_description" [(ngModel)]="jobOffer.projectDescription" class="form-control"
+                         placeholder="">
+                </div>
+              </div>
+              <label>Date de début</label>
+              <div class="form-group">
+                <div class="form-line">
+                  <input type="date" name="start_date" [(ngModel)]="jobOffer.startDate" class="form-control"
+                         placeholder="">
+                </div>
+              </div>
+              <label>Date de fin </label>
+              <div class="form-group">
+                <div class="form-line">
+                  <input type="date" name="end_date" [(ngModel)]="jobOffer.endDate" class="form-control"
+                         placeholder="">
+                </div>
+              </div>
+
+            </form>
+          </div>
+          <div align="right">
+            <button type="button" (click)="addJobOffer()" class="btn-hover btn-border-radius color-1" >Ajouter</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

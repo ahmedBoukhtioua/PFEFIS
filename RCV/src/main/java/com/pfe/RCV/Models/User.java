@@ -6,14 +6,10 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Email;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Document(collection = "users")
 public class User {
-
 
     @Id
     private String  id;
@@ -24,10 +20,13 @@ public class User {
     private String adress;
     private Date birthDate;
     private  boolean enabled;
-    /*
+
     private CV cv;
-    private List<Quiz> quizList;
+    @DBRef
     private List<JobOffer> jobOfferList;
+
+    /*
+    private List<Quiz> quizList;
     private Role
     */
     @UniqueElements
@@ -47,15 +46,21 @@ public class User {
         this.password = password;
     }
 
-    public User(String FName, String photo, @Email String email, String adress, Date birthDate, boolean enabled, @UniqueElements String eNumber, String password, Set<Role> roles) {
+    public User(String FName, @Email String email, List<JobOffer> jobOfferList, @UniqueElements String eNumber, Set<Role> roles) {
         this.FName = FName;
-        this.photo = photo;
+        this.email = email;
+        this.jobOfferList = jobOfferList;
+        this.eNumber = eNumber;
+        this.roles = roles;
+    }
+
+    public User(String FName, @Email String email, String adress, Date birthDate, boolean enabled, CV cv, Set<Role> roles) {
+        this.FName = FName;
         this.email = email;
         this.adress = adress;
         this.birthDate = birthDate;
         this.enabled = enabled;
-        this.eNumber = eNumber;
-        this.password = password;
+        this.cv = cv;
         this.roles = roles;
     }
 
@@ -139,6 +144,22 @@ public class User {
         this.enabled = enabled;
     }
 
+    public CV getCv() {
+        return cv;
+    }
+
+    public void setCv(CV cv) {
+        this.cv = cv;
+    }
+
+    public List<JobOffer> getJobOfferList() {
+        return jobOfferList;
+    }
+
+    public void setJobOfferList(List<JobOffer> jobOfferList) {
+        this.jobOfferList = jobOfferList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -151,6 +172,7 @@ public class User {
                 Objects.equals(email, user.email) &&
                 Objects.equals(adress, user.adress) &&
                 Objects.equals(birthDate, user.birthDate) &&
+                Objects.equals(cv, user.cv) &&
                 Objects.equals(eNumber, user.eNumber) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(roles, user.roles);
@@ -158,7 +180,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, FName, photo, email, adress, birthDate, enabled, eNumber, password, roles);
+        return Objects.hash(id, FName, photo, email, adress, birthDate, enabled, cv, eNumber, password, roles);
     }
 
     @Override
@@ -171,6 +193,7 @@ public class User {
                 ", adress='" + adress + '\'' +
                 ", birthDate=" + birthDate +
                 ", enabled=" + enabled +
+                ", cv=" + cv +
                 ", eNumber='" + eNumber + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
