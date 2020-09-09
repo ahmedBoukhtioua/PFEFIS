@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "./services/token-storage.service";
+import {Router} from "@angular/router";
+import {AuthenticationService} from "./services/authentication.service";
+import {user} from "./models/user";
 
 @Component({
   selector: 'app-root',
@@ -11,12 +14,31 @@ export class AppComponent implements OnInit {
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
-  eNumber: string;
-
-  constructor(private tokenStorageService: TokenStorageService) { }
+  email: string;
+  iduser:string;
+  user1: user;
+  title:any;
+  constructor(private tokenStorageService: TokenStorageService,public router: Router,private AuthService :AuthenticationService) { }
 
   ngOnInit() {
-    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    this.user1=new user()
+    if(localStorage.getItem('user'))
+    {
+
+      this.isLoggedIn=true
+      console.log(this.isLoggedIn)
+      this.AuthService.getCurrentUser(localStorage.getItem('user')).subscribe((data)=>{
+        this.user1=data;
+        this.email=data.email;
+        this.iduser = data.id;
+        console.log(this.email)
+      })
+
+    }
+
+
+
+    /*this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
@@ -25,12 +47,39 @@ export class AppComponent implements OnInit {
       //this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
      // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
 
-      this.eNumber = user.eNumber;
-    }
+      this.eNumber = user.eNumber;*/
+      // if(this.roles[0]==="ROLE_RH"|| this.roles[0]==='ROLE_MANAGER')
+      // {
+      //   localStorage.setItem('isManager','true')
+      //
+      //
+      // }
+      // else {
+      //
+      //   localStorage.setItem('isManager','false')
+      //
+      // }
+
+
+
+
   }
 
-  logout() {
-    this.tokenStorageService.signOut();
-    window.location.reload();
+  logout(){
+
+    localStorage.removeItem("user");
+    this.router.navigate(['/login'])
+
+  }
+  isManager()
+  {
+    if (this.user1.roles[0]==="ROLE_RH"||this.user1.roles[0]==="ROLE_MANAGER"){
+      return true
+
+    }
+    else {
+      return false
+
+    }
   }
 }

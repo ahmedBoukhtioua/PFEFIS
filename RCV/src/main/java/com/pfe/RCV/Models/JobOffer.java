@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -11,9 +12,10 @@ import java.util.Objects;
 @Document(collection = "jobOffer")
 public class JobOffer {
     @Id
-    private String id;
+    private String idJobOffer;
     private  String projectName;
     private String  projectDescription;
+    private LocalDateTime addDate;
     private Date   startDate;
     private Date endDate;
     @DBRef
@@ -21,14 +23,13 @@ public class JobOffer {
     @DBRef
     private User manager;
     private boolean valide;
-    private boolean archive;
 
 
     public JobOffer() {
     }
 
-    public JobOffer(String id, String projectName, String projectDescription, Date startDate, Date endDate, List<User> listCandidat, User manager, boolean valide, boolean archive) {
-        this.id = id;
+    public JobOffer(String idJobOffer, String projectName, String projectDescription, Date startDate, Date endDate, List<User> listCandidat, User manager, boolean valide) {
+        this.idJobOffer = idJobOffer;
         this.projectName = projectName;
         this.projectDescription = projectDescription;
         this.startDate = startDate;
@@ -36,15 +37,23 @@ public class JobOffer {
         this.listCandidat = listCandidat;
         this.manager = manager;
         this.valide = valide;
-        this.archive = archive;
     }
 
-    public String getId() {
-        return id;
+    public JobOffer(String idJobOffer, String projectName, String projectDescription, Date startDate, Date endDate , LocalDateTime addDate) {
+        this.idJobOffer = idJobOffer;
+        this.projectName = projectName;
+        this.projectDescription = projectDescription;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.addDate = addDate;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getIdJobOffer() {
+        return idJobOffer;
+    }
+
+    public void setIdJobOffer(String idJobOffer) {
+        this.idJobOffer = idJobOffer;
     }
 
     public String getProjectName() {
@@ -103,12 +112,13 @@ public class JobOffer {
         this.valide = valide;
     }
 
-    public boolean isArchive() {
-        return archive;
+
+    public LocalDateTime getAddDate() {
+        return addDate;
     }
 
-    public void setArchive(boolean archive) {
-        this.archive = archive;
+    public void setAddDate(LocalDateTime addDate) {
+        this.addDate = addDate;
     }
 
     @Override
@@ -117,9 +127,10 @@ public class JobOffer {
         if (o == null || getClass() != o.getClass()) return false;
         JobOffer jobOffer = (JobOffer) o;
         return valide == jobOffer.valide &&
-                archive == jobOffer.archive &&
+                Objects.equals(idJobOffer, jobOffer.idJobOffer) &&
                 Objects.equals(projectName, jobOffer.projectName) &&
                 Objects.equals(projectDescription, jobOffer.projectDescription) &&
+                Objects.equals(addDate, jobOffer.addDate) &&
                 Objects.equals(startDate, jobOffer.startDate) &&
                 Objects.equals(endDate, jobOffer.endDate) &&
                 Objects.equals(listCandidat, jobOffer.listCandidat) &&
@@ -127,21 +138,17 @@ public class JobOffer {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(projectName, projectDescription, startDate, endDate, listCandidat, manager, valide, archive);
-    }
-
-    @Override
     public String toString() {
         return "JobOffer{" +
-                "projectName='" + projectName + '\'' +
+                "id='" + idJobOffer + '\'' +
+                ", projectName='" + projectName + '\'' +
                 ", projectDescription='" + projectDescription + '\'' +
+                ", addDate=" + addDate +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", listCandidat=" + listCandidat +
                 ", manager=" + manager +
                 ", valide=" + valide +
-                ", archive=" + archive +
                 '}';
     }
 }

@@ -14,7 +14,6 @@ public class JwtResponse {
         this.token = token;
         this.type = type;
         this.id = id;
-        this.eNumber = eNumber;
         this.email = email;
         this.roles = roles;
     }
@@ -68,10 +67,10 @@ public class JwtResponse {
 
     }
 
-    public JwtResponse(String token, String id, String eNumber, String email, List<String> roles) {
+
+    public JwtResponse(String token, String id, String email, List<String> roles) {
         this.token = token;
         this.id = id;
-        this.eNumber = eNumber;
         this.email = email;
         this.roles = roles;
     }

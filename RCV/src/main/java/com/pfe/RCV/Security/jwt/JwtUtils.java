@@ -27,7 +27,7 @@ public class JwtUtils {
         String encodedString = Base64.getEncoder().encodeToString(secret.getBytes());
 
         return Jwts.builder()
-                .setSubject((userPrincipal.geteNumber()))
+                .setSubject((userPrincipal.getEmail()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + expiration))
                 .signWith(SignatureAlgorithm.HS512, encodedString)

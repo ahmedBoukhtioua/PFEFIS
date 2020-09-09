@@ -7,13 +7,19 @@ import {FormsModule} from "@angular/forms";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatIconModule} from "@angular/material/icon";
-import { ArchivedJobOfferComponent } from './archived-job-offer/archived-job-offer.component';
 import {MatDialogModule} from "@angular/material/dialog";
-
-
+import {jqxDataTableModule} from "jqwidgets-ng/jqxdatatable";
+import {ArchivedJobOfferComponent} from "./archived-job-offer/archived-job-offer.component";
+import {jqxInputModule} from "jqwidgets-ng/jqxinput";
+import {jqxDateTimeInputModule} from "jqwidgets-ng/jqxdatetimeinput";
+import {jqxButtonModule} from "jqwidgets-ng/jqxbuttons";
+import {jqxWindowModule} from "jqwidgets-ng/jqxwindow";
+import {jqxGridModule} from "jqwidgets-ng/jqxgrid";
+import {jqxNumberInputModule} from "jqwidgets-ng/jqxnumberinput";
 
 @NgModule({
-  declarations: [AddJobOfferComponent,ListJobOfferComponent, ArchivedJobOfferComponent],
+  declarations: [AddJobOfferComponent,ListJobOfferComponent,ArchivedJobOfferComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -21,7 +27,16 @@ import {MatDialogModule} from "@angular/material/dialog";
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+   // Ng2SmartTableModule,
+    jqxDataTableModule,
+    jqxGridModule,
+    jqxInputModule,
+    jqxDateTimeInputModule,
+    jqxButtonModule,
+    jqxWindowModule,
+    jqxNumberInputModule,
   ]
 })
 export class JobOfferModule { }
+

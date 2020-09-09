@@ -22,20 +22,31 @@ export class JobOfferService {
 
   }
 
-  updateJoboffer(jobOffer: jobOffer[]): Observable<Object> {
-    return this.http.put(`${this.baseUrl}` + `/update/`, jobOffer);
+  updateJoboffer(id:string,job: jobOffer): Observable<Object> {
+    return this.http.put(`${this.baseUrl}` + `/update/` +id,job);
   }
 
-  getJobOffer(): Observable<jobOffer[]> {
+  getJobOfferArchived(): Observable<jobOffer[]> {
+    return this.http.get<jobOffer[]>(`${this.baseUrl}` + `/findAllArchived`);
+  }
+  getJobOfferValide(): Observable<jobOffer[]> {
+    return this.http.get<jobOffer[]>(`${this.baseUrl}` + `/findAllValide`);
+  }
+  getAllJobOffer(): Observable<jobOffer[]> {
     return this.http.get<jobOffer[]>(`${this.baseUrl}` + `/findAll`);
   }
-
-  archivedJobOffer(id: string,jobOffer: jobOffer[] ): Observable<jobOffer> {
-    return this.http.put<jobOffer>(`${this.baseUrl}` + `/archived/` + `${id}`,jobOffer);
+  getJobOfferById(id : string): Observable<jobOffer> {
+    return this.http.get<jobOffer>(`${this.baseUrl}` + `/findById/`+ `${id}`);
+  }
+  getManager(): Observable<user> {
+    return this.http.get<user>(`${this.baseUrl}` + `/findManagers`);
+  }
+  archivedJobOffer(id: string,jobOffer: jobOffer ): Observable<jobOffer> {
+    return this.http.put<jobOffer>(`${this.baseUrl}` + `/archived/` + id,jobOffer);
   }
 
   validateJobOffer(jobOffer: jobOffer, id: string): Observable<jobOffer> {
-    return this.http.put<jobOffer>(`${this.baseUrl}` + `/validate/` + `${id}`,jobOffer);
+    return this.http.put<jobOffer>(`${this.baseUrl}` + `/validate/` + id,jobOffer);
   }
   getJobOfferByUser(manager: user): Observable<Object> {
     return this.http.get(`${this.baseUrl}` + `/findAllConnected/` + manager);

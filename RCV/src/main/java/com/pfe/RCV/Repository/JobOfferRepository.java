@@ -9,7 +9,7 @@ import java.util.List;
 @Component
 public interface JobOfferRepository extends MongoRepository<JobOffer,String> {
 
-    List<JobOffer> findAllByArchiveAndValide(boolean archive,boolean valide);
+    List<JobOffer> findAllByValide(boolean valide);
    List<JobOffer> findAllJobOffersByManager(User user);
 
 }

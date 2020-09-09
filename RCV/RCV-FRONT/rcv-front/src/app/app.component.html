@@ -1,18 +1,27 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-dark bg-dark">
+  <nav *ngIf="router.url != '/login' && router.url != '/register'" class="navbar navbar-expand navbar-dark bg-dark">
     <a href="#" class="navbar-brand">RCV</a>
     <ul class="navbar-nav mr-auto" routerLinkActive="active">
       <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
+        <a href="/home" class="nav-link" routerLink="home" *ngIf="isManager()">Home </a>
       </li>
       <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">User</a>
+        <a href="/profile" class="nav-link" *ngIf="isLoggedIn" routerLink="profile">User</a>
       </li>
       <li class="nav-item">
         <a href="/addJobOffer" class="nav-link"  routerLink="addJobOffer"> add jobOffer</a>
       </li>
       <li class="nav-item">
         <a href="/listJobOffer" class="nav-link"  routerLink="listJobOffer"> get jobOffer</a>
+      </li>
+      <li class="nav-item">
+        <a href="/archivedJobOffer" class="nav-link"  routerLink="archivedJobOffer"> archived jobOffer</a>
+      </li>
+      <li class="nav-item">
+        <a href="/offer" class="nav-link"  routerLink="offer"> offer</a>
+      </li>
+      <li class="nav-item">
+        <a href="/addQuiz" class="nav-link"  routerLink="addQuiz"> Ajouter Quiz</a>
       </li>
 
     </ul>
@@ -28,7 +37,7 @@
 
     <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
       <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ eNumber }}</a>
+        <a href="/profile" class="nav-link" routerLink="profile">{{ email }}</a>
       </li>
       <li class="nav-item">
         <a href class="nav-link" (click)="logout()">LogOut</a>

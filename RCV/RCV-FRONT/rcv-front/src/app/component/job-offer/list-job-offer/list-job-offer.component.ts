@@ -1,129 +1,180 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {jobOffer} from "../../../models/jobOffer";
 import {JobOfferService} from "../../../services/jobOffer/job-offer.service";
-import {ej} from '@syncfusion/ej2-data/dist/global';
-import { MatTableDataSource} from "@angular/material/table";
-import { MatSort} from '@angular/material/sort';
-import {MatPaginator} from '@angular/material/paginator';
-import data = ej.data;
-import {MatDialog} from "@angular/material/dialog";
+import {jqxGridComponent} from "jqwidgets-ng/jqxgrid";
+import {jqxWindowComponent} from "jqwidgets-ng/jqxwindow";
+import {jqxInputComponent} from "jqwidgets-ng/jqxinput";
+import {jqxNumberInputComponent} from "jqwidgets-ng/jqxnumberinput";
+import {jqxDateTimeInputComponent} from "jqwidgets-ng/jqxdatetimeinput";
+
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-job-offer',
   templateUrl: './list-job-offer.component.html',
   styleUrls: ['./list-job-offer.component.css']
 })
-export class ListJobOfferComponent implements OnInit {
+export class ListJobOfferComponent  {
+ /***
+  @ViewChild('myGrid', { static: false }) myGrid: jqxGridComponent;
+  @ViewChild('myWindow', { static: false }) myWindow: jqxWindowComponent;
+  @ViewChild('projectName', { static: false }) projectName: jqxInputComponent;
+  @ViewChild('id', { static: false }) id: jqxInputComponent;
+  @ViewChild('projectDescription', { static: false }) projectDescription: jqxInputComponent;
+  @ViewChild('startDate', { static: false }) startDate: jqxDateTimeInputComponent;
+  @ViewChild('endDate', { static: false }) endDate: jqxDateTimeInputComponent;
+  @ViewChild('manager', { static: false }) manager: jqxNumberInputComponent;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  data: jobOffer[];
+  editrow: string;
 
-  displayedColumns: string[] = ['projectName', 'projectDescription', 'startDate', 'endDate', 'manager', 'archivage', 'suppression'];
-  dataSource: MatTableDataSource<jobOffer>;
-  row;
-  rowId ;
-  rowProjectName;
-  rowProjectDescription;
-  rowStartDate;
-  rowEndDate;
-  rowManager;
-  idColumn;
-  dialogRef;
-  value;
-  array: jobOffer[] = [];
-  constructor(private jobOfferService: JobOfferService ,public dialog: MatDialog) {
-  }
-  ngOnInit() {setTimeout(() => {
-    this.jobOfferService.getJobOffer().subscribe((data : jobOffer[]) => {
-      console.log(data);
-
-      this.array = data;
-
-
-      this.dataSource = new MatTableDataSource(this.array);
-      console.log(this.dataSource.data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sortingDataAccessor = (item, property) => {
-        switch (property) {
-          case 'projectName': return item.projectName;
-          case 'startDate': return item.startDate;
-          case 'endDate': return item.endDate;
-
-          default: return item[property];
-        }
-      };
-      this.dataSource.sort = this.sort;
-      // @ts-ignore
-      this.dataSource.filterPredicate = (order: Order, filter: string) => {
-        const transformedFilter = filter.trim().toLowerCase();
-
-        const listAsFlatString = (obj): string => {
-          let returnVal = '';
-
-          Object.values(obj).forEach((val) => {
-            if (typeof val !== 'object') {
-              returnVal = returnVal + ' ' + val;
-            } else if (val !== null) {
-              returnVal = returnVal + ' ' + listAsFlatString(val);
-            }
-          });
-
-          return returnVal.trim().toLowerCase();
-        };
-
-        return listAsFlatString(order).includes(transformedFilter);
-      };
-
-    });
-  });
-
-  }
-  showDiag(myTemplate, row) {
-    this.rowProjectName = row.projectName;
-    this.rowProjectDescription = row.projectDescription;
-    this.rowStartDate = row.startDate;
-    this.rowEndDate = row.endDate;
-    this.rowManager = row.manager;
-
-    const dialogRef = this.dialog.open(myTemplate);
+  constructor(private jobOfferService: JobOfferService) {
   }
 
-  onClick(): void {
-    this.dialogRef.close();
+  public source: any  =
+    {
+      datatype: 'local',
+      datafields: [
+
+        { name: 'projectName', type: 'string' },
+        { name: 'id', type: 'string' },
+        { name: 'projectDescription', type: 'string' },
+        { name: 'startDate', type: 'date' },
+        { name: 'endDate', type: 'date' },
+        { name: 'manager', type: 'string' },
+      ],
+      dataType: 'array'
+
+    };
+
+  dataAdapter = new jqx.dataAdapter(this.source);
+  tempIndexHolder: string;
+
+  getWidth() : any {
+    if (document.body.offsetWidth < 850) {
+      return '90%';
+    }
+
+    return 850;
   }
-  applyFilter(filterValue: string) {
-    const filters = filterValue.trim().toLowerCase();
-    this.dataSource.filter = filters;
+  columns: any[] =
+    [
+
+      { text: 'id', datafield: 'id', width: 200 },
+      { text: 'Project Name', datafield: 'projectName', width: 200 },
+      { text: 'Project Description', datafield: 'projectDescription', width: 400 },
+      { text: 'Start Date', datafield: 'startDate', width: 200 },
+      { text: 'End Date', datafield: 'endDate', width: 200 },
+      { text: 'Manager', datafield: 'manager', width: 200 },
+       {
+      text: 'Edit', datafield: 'Edit', columntype: 'button',
+      cellsrenderer: (): string => {
+        return 'Edit';
+      },
+      buttonclick: (row: string): void => {
+        //get the data and append in to the inputs
+        this.editrow = row;
+        let dataRecord = this.myGrid.getrowdatabyid(this.editrow);
+        this.id.val(dataRecord.id);
+        this.projectName.val(dataRecord.projectName);
+        this.projectDescription.val(dataRecord.projectDescription);
+        this.startDate.value(dataRecord.startDate);
+        this.endDate.value(dataRecord.endDate);
+        this.manager.val(dataRecord.manager);
+        // show the popup window.
+        this.myWindow.position({ x: 68, y: 368 });
+        this.myWindow.open();
+      }
+    }
+
+    ];
+  saveBtn(): void {
+
+      let j = new jobOffer();
+      j.idJobOffer = this.id.val();
+      j.projectName = this.projectName.val();
+      j.projectDescription = this.projectDescription.val();
+      j.startDate = this.startDate.value();
+      j.endDate = this.endDate.value();
+
+      this.jobOfferService.updateJoboffer(j.idJobOffer, j).subscribe(i => {
+        console.log(i)
+      })
+
+  }
+  cancelBtn(): void {
+    this.myWindow.hide();
   }
 
-  OnSearchClear() {
-    this.value = '';
-  }
 
-  updateJobOffer(data)
+  ngOnInit(): void {
+    this.jobOfferService.getJobOfferValide().subscribe(
+      data => {
+        this.source.localdata = data;
+        console.log(this.source.localdata );
+        this.dataAdapter = new jqx.dataAdapter(this.source);
+      })
+
+  }
+  updateJobOffer()
   {
-    this.jobOfferService.updateJoboffer(this.dataSource.data).subscribe(data => console.log(data), error => console.log(error));
+
+   // this.jobOfferService.updateJoboffer().subscribe(data => console.log(data), error => console.log(error));
   }
-  archivedJobOffer(data,row)
+  archivedJobOffer()
   {
-    this.jobOfferService.archivedJobOffer(row.id,this.dataSource.data).subscribe(data => console.log(data), error => console.log(error));
-    this.deleteRowTable(this.rowId, this.idColumn, this.paginator, this.dataSource);
+   // this.jobOfferService.archivedJobOffer().subscribe(data => console.log(data), error => console.log(error));
   }
  /* validateJobOffer(id)
   {
     this.jobOfferService.validateJobOffer(id).subscribe(data => console.log(data), error => console.log(error));
   }*/
-  supprimerJobOffer(row) {
-    this.rowId = row.id
-    this.jobOfferService.deleteJobOffer(this. rowId).subscribe(() => console.log(row.id), error => console.log(error));
-    this.deleteRowTable(this.rowId, this.idColumn, this.paginator, this.dataSource);
+  //supprimerJobOffer( {
+   // this.jobOfferService.deleteJobOffer().subscribe(() => console.log(row.id), error => console.log(error));
+ // }*/
+ /*settings = {
+   add: {
+     addButtonContent: '<i class="nb-plus"></i>',
+     createButtonContent: '<i class="nb-checkmark"></i>',
+     cancelButtonContent: '<i class="nb-close"></i>',
+   },
+   edit: {
+     editButtonContent: '<i class="nb-edit"></i>',
+     saveButtonContent: '<i class="nb-checkmark"></i>',
+     cancelButtonContent: '<i class="nb-close"></i>',
+   },
+   delete: {
+     deleteButtonContent: '<i class="nb-trash"></i>',
+     confirmDelete: true,
+   },
+   columns: {
+     id: {
+       title: 'ID',
+       type: 'string',
+     },
+     projectName: {
+       title: 'First Name',
+       type: 'string',
+     },
+   },
+ };
+
+
+
+  source: ServerDataSource;
+
+  constructor(http: HttpClient) {
+
+    this.source = new ServerDataSource(http, { dataKey: 'resource', endPoint:'http://localhost:8181/api/jobOffer/findAllArchived' })
+
   }
-  deleteRowTable(rowId, idColumn, paginator, dataSource) {
-    this.dataSource.data = dataSource.data;
-    const itemIndex = this.dataSource.data.findIndex(obj => obj[idColumn] === rowId);
-    console.log(itemIndex);
-    dataSource.data.splice(itemIndex, 1);
-    console.log(dataSource.data);
-    dataSource.paginator = paginator;
+
+  onDeleteConfirm(event): void {
+    if (window.confirm('Are you sure you want to delete?')) {
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
   }
+*/
 }

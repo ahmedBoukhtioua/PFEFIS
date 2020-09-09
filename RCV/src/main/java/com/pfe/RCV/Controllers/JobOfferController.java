@@ -14,10 +14,28 @@ public class JobOfferController {
     @Autowired
     private JobOfferServices  jobOfferService;
 
-    @RequestMapping(method = RequestMethod.GET,value = "/findAll")
+    @RequestMapping(method = RequestMethod.GET,value = "/findAllArchived")
+    public List<JobOffer> getAllJobOfferArchived(){
+        return jobOfferService.getAllJobOfferArchived();
+    }
+    @RequestMapping(method = RequestMethod.GET,value = "/findAllValide")
+    public List<JobOffer> getAllJobOfferValide(){
+        return jobOfferService.getAllJobOfferValide();
+    }
+     @RequestMapping(method = RequestMethod.GET,value = "/findAll")
     public List<JobOffer> getAllJobOffer(){
         return jobOfferService.getAllJobOffer();
     }
+
+      @RequestMapping(method = RequestMethod.GET,value = "/findById/{id}")
+    public JobOffer getById(@PathVariable String id){
+        return jobOfferService.getJobOffer(id);
+    }
+    @RequestMapping(method = RequestMethod.GET,value = "/findManagers}")
+    public User getManager(){
+        return jobOfferService.getManager();
+    }
+
 
     @RequestMapping(method = RequestMethod.GET,value = "/findAllConnected")
     public List<JobOffer> getAllUser(User user){
@@ -29,9 +47,10 @@ public class JobOfferController {
          return jobOfferService.addJobOffer(jobOffer);
     }
 
-            @RequestMapping(method = RequestMethod.PUT, value = "/update/{jobOffer")
-    public void updateJobOffer(@PathVariable JobOffer jobOffer ){
-        jobOfferService.modifierJobOffer(jobOffer);
+            @RequestMapping(method = RequestMethod.PUT, value = "/update/{id}")
+    public void updateJobOffer(@PathVariable String id,@RequestBody JobOffer jobOffer ){
+
+        jobOfferService.modifierJobOffer(id,jobOffer);
     }
 
 

@@ -5,10 +5,10 @@ idJobOffer: string;
 projectName:string;
 projectDescription: string;
 startDate: Date;
-endDate; Date;
+endDate: Date;
+addDate: Date;
 listCandidat: user;
 manager: user;
-archived: boolean;
-validate: boolean;
+valide: boolean;
 
 }

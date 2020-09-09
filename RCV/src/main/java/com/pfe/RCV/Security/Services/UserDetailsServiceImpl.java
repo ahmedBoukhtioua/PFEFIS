@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,14 +14,30 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    PasswordEncoder encoder;
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String eNumber) throws UsernameNotFoundException {
-        User user = userRepository.findByeNumber(eNumber)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + eNumber));
-
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " +email));
         return UserDetailsImpl.build(user);
+
     }
 
+    public User updateProfil(String id, User candidat) {
+
+        User candidat1 = userRepository.findById(id).orElse(null);
+
+        candidat1.setEmail(candidat.getEmail());
+        candidat1.setPassword(encoder.encode(candidat.getPassword()));
+        candidat1.setAdress(candidat.getAdress());
+        candidat1.setFName(candidat.getFName());
+        candidat1.setBirthDate(candidat.getBirthDate());    
+        candidat1.setPhoto(candidat.getPhoto());
+        candidat1=candidat;
+        userRepository.save(candidat1);
+        return candidat1;
+    }
 }

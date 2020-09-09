@@ -1,17 +1,19 @@
 package com.pfe.RCV.Security.Services;
 
-import com.nimbusds.oauth2.sdk.Role;
-import com.pfe.RCV.Controllers.AuthController;
 import com.pfe.RCV.Models.ERole;
 import com.pfe.RCV.Models.JobOffer;
+import com.pfe.RCV.Models.Role;
 import com.pfe.RCV.Models.User;
 import com.pfe.RCV.Repository.JobOfferRepository;
 import com.pfe.RCV.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class JobOfferServices {
 
@@ -24,23 +26,36 @@ public class JobOfferServices {
 
         Date startDate = new Date();
         Date endDate = new Date();
+        LocalDateTime addDate = LocalDateTime.now();
         jobOffer.setStartDate(startDate);
         jobOffer.setEndDate(endDate);
+        jobOffer.setAddDate(addDate);
+        jobOffer.setValide(true);
         jobOfferRepository.save(jobOffer);
         return jobOffer;
     }
 
-    public List<JobOffer> getAllJobOffer(){
-        return jobOfferRepository.findAllByArchiveAndValide(false,false);
+    public List<JobOffer> getAllJobOfferArchived(){
+        return jobOfferRepository.findAllByValide(false);
     }
-    public void modifierJobOffer(JobOffer jobOffer){
+    public List<JobOffer> getAllJobOfferValide(){
+        return jobOfferRepository.findAllByValide(true);
+    }
+    public List<JobOffer> getAllJobOffer(){
+        return jobOfferRepository.findAll();
+    }
 
 
-        jobOffer.setEndDate(jobOffer.getEndDate());
-        jobOffer.setStartDate(jobOffer.getStartDate());
-        jobOffer.setProjectDescription(jobOffer.getProjectDescription());
-        jobOffer.setProjectName(jobOffer.getProjectName());
-        jobOfferRepository.save(jobOffer);
+    public void modifierJobOffer(String id,JobOffer jobOffer){
+        System.out.println("=====================================");
+        System.out.println(id);
+        JobOffer jobOffer1=jobOfferRepository.findById(id).orElse(null);
+        jobOffer1.setEndDate(jobOffer.getEndDate());
+        jobOffer1.setStartDate(jobOffer.getStartDate());
+        jobOffer1.setProjectDescription(jobOffer.getProjectDescription());
+        jobOffer1.setProjectName(jobOffer.getProjectName());
+        jobOffer1.setManager(jobOffer.getManager());
+        jobOfferRepository.save(jobOffer1);
     }
 
     public JobOffer getJobOffer(String id){
@@ -54,12 +69,15 @@ public class JobOfferServices {
     }
     public void archiverJobOffer(String id) {
         JobOffer jobOffer = jobOfferRepository.findById(id).orElse(null);
-        jobOffer.setArchive(true);
+        jobOffer.setValide(false);
         jobOfferRepository.save(jobOffer);
     }
          public List<JobOffer> getAllByUser(User u) {
         return jobOfferRepository.findAllJobOffersByManager(u);
     }
     public void deleteJobOffer(String id){jobOfferRepository.deleteById(id);}
+    public User getManager(){
+        return userRepository.findByRoles(ERole.ROLE_MANAGER);
+    }
 
 }

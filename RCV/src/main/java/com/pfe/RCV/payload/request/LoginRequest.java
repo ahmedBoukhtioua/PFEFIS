@@ -1,29 +1,29 @@
 package com.pfe.RCV.payload.request;
 
 public class LoginRequest {
-        private  String eNumber ;
+        private  String email ;
         private  String password ;
+        //private String eNumber;
 
-        public LoginRequest(String eNumber, String password) {
-            eNumber = eNumber;
+        public LoginRequest(String email, String password) {
+            this.email = email;
             this.password = password;
         }
+    public LoginRequest(){}
 
-        public LoginRequest() {
-        }
+    public String getEmail() {
+        return email;
+    }
 
-        public String getUsername() {
-            return eNumber;
-        }
-    public void seteNumber(String eNumber) {
-        this.eNumber = eNumber;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
-            return password;
-        }
+        return password;
+    }
 
-        public void setPassword(String password) {
-            this.password = password;
-        }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

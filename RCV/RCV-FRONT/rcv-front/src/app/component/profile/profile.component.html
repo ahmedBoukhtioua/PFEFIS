@@ -1,121 +1,70 @@
-<div class="content-wrapper"   >
-  <!-- Content Header (Page header) -->
-  <div class="row">
 
+<div class=" pt-5 mt-3 mb-3" >
 
-    <div class="box" id="parent">
+  <div class="card-header">
+    <h4 class="mb-0">Modifier Votre profil</h4>
+  </div>
+  <div class="card-body mt-2">
+    <form class="form" role="form" autocomplete="off">
+      <!--<div class="form-group row" *ngIf="isEditError">
+        <label class="col-lg-3 col-form-label form-control-label"></label>
 
-      <!-- /.box-header -->
-      <div class="box-body" id="child-left">
-        <table #dataTable   class="table table-bordered table-striped" align="center" style="width:85% ">
-          <thead>
-          <tr>
-            <th>nom</th>
-            <th>description</th>
-            <th>quantite</th>
-            <th>categorie</th>
-            <th>supprimer</th>
-            <th>modifier</th>
-            <th>proposition</th>
-          </tr>
-          </thead>
-          <tbody></tbody></table>
-          <!--<tr *ngFor="let s of offres" >
-            <td>{{s.name}}</td>
-            <td>{{s.description}}</td>
-            <td>{{s.quantite}}</td>
-            <td>{{s.categorie}}</td>
-            <td><a class="btn btn-danger" (click)="onDelete(s.id_offre)"><div class="fa fa-fw fa-eraser"></div>delete</a></td>
-            <td><a class="btn btn-success" (click)="onEdit(s)"><div class="fa fa-fw fa-edit"></div> Edit</a></td>
-            <td><a class="btn btn-info" (click)="onlistpropo(s)"><div class="fa fa-fw fa-navicon"></div>proposition</a></td>
-          </tr>
+        <div class="col-lg-9" >
+          <div class="alert alert-danger" role="alert">Password actuel incorrect</div>
 
-          </tbody>
-          <tfoot>
-          <tr>
-            <th>nom</th>
-            <th>description</th>
-            <th>quantite</th>
-            <th>categorie</th>
-            <th>supprimer</th>
-            <th>modifier</th>
-            <th>proposition</th>
-          </tr>
-          </tfoot>
-        </table>
-      </div>-->
-      <!-- /.box-body -->
-     <!-- <div class="col-md-6" id="child-right">
-        <br><br><br><br><br><br><br><br>
-        <div *ngIf="abc===0">
-          <a class="btn btn-success" (click)="createbutton()"> créer offre</a>
         </div>
-        <div class="box box-primary" *ngIf="abc===1">
+      </div>-->
+      <div class="form-group row" *ngIf="EmptyField">
+        <label class="col-lg-3 col-form-label form-control-label"></label>
 
+        <div class="col-lg-9" >
+          <div class="alert alert-danger" role="alert">Veuillez remplir tous les champs</div>
 
-          <form  *ngIf="!isSuccessful "
-                 name="form"
-                 (ngSubmit)="f.form.valid && onsaveoffre(f.value)"
-                 #f="ngForm"
-                 novalidate>
-            <div class="form-group">
-
-              <label for="username" class="control-label"> Name</label>
-
-              <input id="username" class="form-control"
-                     required
-                     minlength="3"
-                     maxlength="20"
-                     #username="ngModel" type="text" name="name" ngModel [(ngModel)]="offres.name">
-            </div>
-            <div class="alert-danger" *ngIf="f.submitted && username.invalid">
-              <div *ngIf="username.errors.required">Username is required</div>
-              <div *ngIf="username.errors.minlength">
-                Username must be at least 3 characters
-              </div>
-              <div *ngIf="username.errors.maxlength">
-                Username must be at most 20 characters
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="descriptions" > Description</label>
-              <textarea id="descriptions"   #descriptions="ngModel" required
-                        minlength="3"
-                        maxlength="2000" class="form-control" type="text" name="description" ngModel [(ngModel)]="offres.description"></textarea>
-            </div>
-            <div class="alert-danger" *ngIf="f.submitted && descriptions.invalid">
-              <div *ngIf="descriptions.errors.required">description is required</div>
-              <div *ngIf="descriptions.errors.minlength">
-                description must be at least 3 characters
-              </div>
-              <div *ngIf="descriptions.errors.maxlength">
-                description must be at most 2000 characters
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="quantite" class="control-label"> Quantite</label>
-              <input id="quantite" class="form-control"  required type="number" name="quantite" #quantite="ngModel" ngModel [(ngModel)]="offres.quantite">
-            </div>
-            <div class="alert-danger" *ngIf="f.submitted && quantite.invalid">
-              <div *ngIf="quantite.errors.required">quantite is required</div></div>
-            <label>Choisissez une categorie</label>
-            <select  [(ngModel)]="categorie" name="categorie" (change)="selected()">
-              <option *ngFor="let food of equipes" [value]="food.value"  >
-                {{food.viewValue}}
-              </option>
-            </select>
-
-
-            <div class="box-footer">
-              <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-          </form>
         </div>
       </div>
-    </div>
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Nom et prénom</label>
+        <div class="col-lg-9">
+          <input class="form-control" type="text" name="nom" [(ngModel)]="this.user.FName" value="{{this.user.FName}}">
+        </div>
+      </div>
 
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Date de naissance</label>
+        <div class="col-lg-9">
+          <input class="form-control" type="date"  name="dateNaissance" [(ngModel)]="this.user.birthDate" value="{{this.user.birthDate}}">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Email</label>
+        <div class="col-lg-9">
+          <input class="form-control"   type="email" name="email" [(ngModel)]="this.user.email" value="{{this.user.email}}">
+        </div>
+      </div>
+
+     <!-- <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Mot de passe actuel</label>
+        <div class="col-lg-9">
+          <input class="form-control" type="password" name="currentPassword" value="" [(ngModel)]="this.user.password" >
+        </div>
+      </div>-->
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Nouveau mot de passe</label>
+        <div class="col-lg-9">
+          <input class="form-control" type="password" [(ngModel)]="this.user.password" name="password" value="{{this.user.password}}" >
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label"></label>
+        <div class="col-lg-9">
+          <div class="btn-toolbar ">
+            <button type="submit" name="cancel" (click)="annuler()"  class="btn btn-secondary mx-1">Annuler</button>
+
+            <button type="submit" name="submit" class="btn btn-primary " (click)="this.update(this.user.id)">Modifier</button>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
- -->
-
-
-</div></div> </div> </div>
+</div>
+<!-- /form user info -->

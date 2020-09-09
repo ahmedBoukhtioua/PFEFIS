@@ -6,6 +6,7 @@ import com.pfe.RCV.Models.User;
 import com.pfe.RCV.Repository.RoleRepository;
 import com.pfe.RCV.Repository.UserRepository;
 import com.pfe.RCV.Security.Services.UserDetailsImpl;
+import com.pfe.RCV.Security.Services.UserDetailsServiceImpl;
 import com.pfe.RCV.Security.jwt.JwtUtils;
 import com.pfe.RCV.payload.request.LoginRequest;
 import com.pfe.RCV.payload.request.SignupRequest;
@@ -17,6 +18,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,6 +42,9 @@ public class AuthController {
     RoleRepository roleRepository;
 
     @Autowired
+    UserDetailsServiceImpl userimpl;
+
+    @Autowired
     PasswordEncoder encoder;
 
     @Autowired
@@ -57,13 +62,10 @@ public class AuthController {
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
-
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-
+        System.out.println("*/ JWT *"+ jwt);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
@@ -71,18 +73,12 @@ public class AuthController {
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
-                userDetails.geteNumber(),
                 userDetails.getEmail(),
                 roles));
     }
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
-        if (userRepository.existsByeNumber(signUpRequest.geteNumber())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is already taken!"));
-        }
 
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
             return ResponseEntity
@@ -91,15 +87,13 @@ public class AuthController {
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.geteNumber(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+        User user = new User(signUpRequest.getFName(),signUpRequest.getEmail(),signUpRequest.getAdress(),signUpRequest.getBirthDate(),encoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRoles();
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role RHRole = roleRepository.findByName(ERole.ROLE_RH)
+            Role RHRole = roleRepository.findByName(ERole.ROLE_CANDIDAT)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(RHRole);
         } else {
@@ -125,6 +119,7 @@ public class AuthController {
             });
         }
 
+
         user.setRoles(roles);
         userRepository.save(user);
 
@@ -133,6 +128,12 @@ public class AuthController {
 
     @GetMapping(value = "/user/{id}" )
     public User user(@PathVariable(name = "id") String id ) {
-        return userRepository.findById(id).get();
+        return userRepository.findById(id).orElse(null);
+    }
+
+        @PutMapping(value = "/updateUser/{id}")
+    public void updateProf(@PathVariable String id, @RequestBody User candidat){
+
+        userimpl.updateProfil(id, candidat);
     }
 }

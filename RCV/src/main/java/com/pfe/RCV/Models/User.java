@@ -15,8 +15,10 @@ public class User {
     private String  id;
     private String FName;
     private String photo;
-    @Email
+
+    @UniqueElements
     private String  email;
+
     private String adress;
     private Date birthDate;
     private  boolean enabled;
@@ -25,11 +27,9 @@ public class User {
     @DBRef
     private List<JobOffer> jobOfferList;
 
-    /*
+
     private List<Quiz> quizList;
-    private Role
-    */
-    @UniqueElements
+
     private String eNumber;
     private String password;
 
@@ -62,6 +62,30 @@ public class User {
         this.enabled = enabled;
         this.cv = cv;
         this.roles = roles;
+    }
+
+    public User(String id, String FName, String photo, @Email String email, String adress, Date birthDate, boolean enabled, CV cv, List<JobOffer> jobOfferList, List<Quiz> quizList, @UniqueElements String eNumber, String password, Set<Role> roles) {
+        this.id = id;
+        this.FName = FName;
+        this.photo = photo;
+        this.email = email;
+        this.adress = adress;
+        this.birthDate = birthDate;
+        this.enabled = enabled;
+        this.cv = cv;
+        this.jobOfferList = jobOfferList;
+        this.quizList = quizList;
+        this.eNumber = eNumber;
+        this.password = password;
+        this.roles = roles;
+    }
+
+    public User(String FName, @Email String email, String adress, Date birthDate, String password) {
+        this.FName = FName;
+        this.email = email;
+        this.adress = adress;
+        this.birthDate = birthDate;
+        this.password = password;
     }
 
     public String getId() {
@@ -160,6 +184,14 @@ public class User {
         this.jobOfferList = jobOfferList;
     }
 
+    public List<Quiz> getQuizList() {
+        return quizList;
+    }
+
+    public void setQuizList(List<Quiz> quizList) {
+        this.quizList = quizList;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -173,6 +205,8 @@ public class User {
                 Objects.equals(adress, user.adress) &&
                 Objects.equals(birthDate, user.birthDate) &&
                 Objects.equals(cv, user.cv) &&
+                Objects.equals(jobOfferList, user.jobOfferList) &&
+                Objects.equals(quizList, user.quizList) &&
                 Objects.equals(eNumber, user.eNumber) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(roles, user.roles);
@@ -180,7 +214,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, FName, photo, email, adress, birthDate, enabled, cv, eNumber, password, roles);
+        return Objects.hash(id, FName, photo, email, adress, birthDate, enabled, cv, jobOfferList, quizList, eNumber, password, roles);
     }
 
     @Override
@@ -194,6 +228,8 @@ public class User {
                 ", birthDate=" + birthDate +
                 ", enabled=" + enabled +
                 ", cv=" + cv +
+                ", jobOfferList=" + jobOfferList +
+                ", quizList=" + quizList +
                 ", eNumber='" + eNumber + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +

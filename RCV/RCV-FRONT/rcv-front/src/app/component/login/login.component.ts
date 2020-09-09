@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../services/authentication.service";
 import {TokenStorageService} from "../../services/token-storage.service";
+import {user} from "../../models/user";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -14,30 +16,22 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-
-  constructor(private authService: AuthenticationService, private tokenStorage: TokenStorageService) { }
+  user: user;
+  constructor(private authService: AuthenticationService, private tokenStorage: TokenStorageService,private router: Router) { }
 
   ngOnInit() {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-    }
+
+
   }
 
   onSubmit() {
     this.authService.login(this.form).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
 
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
-      },
-      err => {
-        this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
+        localStorage.setItem('user',data.id)
+        this.router.navigate(["/offer"])
+
+
       }
     );
   }
