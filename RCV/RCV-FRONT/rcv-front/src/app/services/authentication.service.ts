@@ -29,7 +29,7 @@ export class AuthenticationService {
     return this.http.post(AUTH_API + 'signup', {
       email: user.email,
       password: user.password,
-      FName: user.FName,
+      fName: user.FName,
     adress: user.adress,
     birthDate: user.birthDate,
     }, httpOptions);

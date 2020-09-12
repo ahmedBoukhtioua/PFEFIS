@@ -1,0 +1,40 @@
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Reponse Quiz {{quiz.quizName}}</h1>
+
+</div>
+
+
+<br>
+<form>
+<div *ngFor="let question of quiz.questionsList;">
+
+
+  <h3 class="font-weight-normal" [innerHTML]="question.question">
+  </h3>
+  <div class="row text-left options">
+
+    <div class="col-6" >
+      <div class="option">
+
+          <input type="radio"   (click)="choose($event['target']['value'], question.question)" [value]="question.optionList[0].optionName"  name="option{{question.question}}"/> {{question.optionList[0].optionName}}
+
+      </div>
+      <div class="option">
+
+        <input type="radio"   (click)="choose($event['target']['value'], question.question)" [value]="question.optionList[1].optionName" name="option{{question.question}}"/> {{question.optionList[1].optionName}}
+
+      </div>
+      <div class="option">
+
+        <input type="radio"    (click)="choose($event['target']['value'], question.question)" [value]="question.optionList[2].optionName" name="option{{question.question}}"/> {{question.optionList[2].optionName}}
+
+      </div>
+    </div>
+  </div>
+
+</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="submit()">Submit</button>
+  </div>
+</form>

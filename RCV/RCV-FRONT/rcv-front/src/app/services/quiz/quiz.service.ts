@@ -3,7 +3,8 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {quiz} from "../../models/quiz";
 import {user} from "../../models/user";
-import {jobOffer} from "../../models/jobOffer";
+import {reponse} from "../../models/Reponse";
+ import {jobOffer} from "../../models/jobOffer";
 import {AuthenticationService} from "../authentication.service";
 
 const httpOptions = {
@@ -14,12 +15,12 @@ const httpOptions = {
 })
 export class QuizService {
   private baseUrl = 'http://localhost:8181/api/quiz'
+  private baseUrl1 = 'http://localhost:8181/api/reponse'
 
   constructor(private http: HttpClient) {
   }
 
   addQuiz(quiz: quiz): Observable<Object> {
-    console.log(quiz);
     return this.http.post(`${this.baseUrl}` + `/addQuiz/`, quiz);
 
   }
@@ -54,6 +55,12 @@ export class QuizService {
   }
   getManager(): Observable<user> {
     return this.http.get<user>(`${this.baseUrl}` + `/findManagers`);
+  }
+  submit(reponse: reponse): Observable<Object> {
+    return this.http.post(`${this.baseUrl1}` + `/submit`, reponse);
+  }
+  getReponseByUser(id:string) : Observable<Object> {
+    return this.http.get<reponse>(`${this.baseUrl1}` + `/findReponseOfUser/` + id);
   }
 
 }

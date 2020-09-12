@@ -2,6 +2,8 @@ package com.pfe.RCV.Controllers;
 
 import com.pfe.RCV.Models.CV;
 import com.pfe.RCV.Models.DivisionList;
+import com.pfe.RCV.Models.JobOffer;
+import com.pfe.RCV.Models.Quiz;
 import com.pfe.RCV.Repository.CvRepository;
 import com.pfe.RCV.Security.Services.CvServices;
 import com.pfe.RCV.Storage.StorageService;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +41,10 @@ public class CvController {
             storageService.store(file);
             files.add(file.getOriginalFilename());
             CV cv = new CV(authController.user(id_user), note, file.getOriginalFilename());
+            cv.setArchived(false);
+            LocalDateTime date = LocalDateTime.now();
+
+            cv.setDate(date);
             cvRepository.save(cv);
 
 
@@ -50,4 +57,24 @@ public class CvController {
 
 
     }
-}}
+
+}
+    @RequestMapping(method = RequestMethod.GET,value = "/findAll")
+    public List<CV> getAll(){
+        return cvServices.getAll();
+    }
+    @RequestMapping(method = RequestMethod.PUT,value = "/validate/{id}")
+    public void validerCV(@PathVariable String id){
+        cvServices.validerCv(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT,value = "/archived/{id}")
+    public void archiverJobOffer(@PathVariable String id){
+        cvServices.archiverCv(id);
+    }
+    @RequestMapping(method = RequestMethod.GET,value = "/findById/{id}")
+    public CV getById(@PathVariable String id){
+        return cvServices.getCv(id);
+    }
+
+}

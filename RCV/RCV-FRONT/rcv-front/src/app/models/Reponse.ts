@@ -1,9 +1,10 @@
 import {user} from "./user";
+import {quiz} from "./quiz";
 
-export class quiz{
+export class reponse{
 
   idReponse: string;
-  idQuiz: string;
+  idQuiz: quiz;
   idUser:user;
   date: Date;
   reponses : Array<string>;

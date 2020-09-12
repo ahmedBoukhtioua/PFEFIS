@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {CvService} from "../../../services/cv/cv.service";
 import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {Router} from "@angular/router";
+import {AuthenticationService} from "../../../services/authentication.service";
+import {user} from "../../../models/user";
 
 @Component({
   selector: 'app-addcv',
@@ -14,12 +17,14 @@ export class AddcvComponent implements OnInit {
   isSuccessful = false;
   display = false ;
   progress: { percentage: number } = { percentage: 0 };
+  isConnected : user;
 
-  constructor( private uploadService: CvService) { }
+  constructor( private uploadService: CvService ,private router: Router,private AuthService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
   uploadfile() {
+
 
     this.currentFileUpload = this.selectedFiles.item(0);
     this.uploadService.pushFileToStorage(this.currentFileUpload  , this.note).subscribe(event => {this.isSuccessful = true;
@@ -28,6 +33,7 @@ export class AddcvComponent implements OnInit {
       } else if (event instanceof HttpResponse) {
         console.log('File is completely uploaded!');
       }
+      this.router.navigate(["/quiz"])
     });
 
     this.selectedFiles = undefined;

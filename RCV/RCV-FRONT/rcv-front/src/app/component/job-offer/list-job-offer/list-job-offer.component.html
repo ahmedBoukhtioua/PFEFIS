@@ -1,66 +1,17 @@
-<!--<jqxDataTable
-  [source]="dataAdapter"
-  [pageable]="true"
-  [filterable]="true"
-  [sortable]="true"
-  [columns]="columns" >
-</jqxDataTable>-->
-<!--
-<jqxGrid #myGrid class="grid"
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Listes des offre</h1>
+</div>
 
-         [width]="getWidth()" [source]="dataAdapter" [pageable]="true"
-         [autoheight]="true" [columns]="columns" >
-</jqxGrid>
-<jqxWindow #myWindow [width]="250" [height]="230" [resizable]="false" [isModal]="false" [autoOpen]="false" [modalOpacity]="'0.01'">
-  <div>Edit</div>
-  <div style="overflow: hidden;">
-    <table>
-      <tr>
-        <td align="right">Project Name:</td>
-        <td align="left">
-          <jqxInput #projectName [width]="100" [height]="23"></jqxInput>
-        </td>
-      </tr>
-      <tr>
-        <td align="right">Project Description:</td>
-        <td align="left">
-          <jqxInput #projectDescription [width]="100" [height]="23"></jqxInput>
-        </td>
-      </tr>
-      <tr>
-        <td align="right">Start Date:</td>
-        <td align="left">
-          <jqxDateTimeInput #startDate [width]="100" [height]="23"></jqxDateTimeInput>
-        </td>
-      </tr>
-      <tr>
-        <td align="right">End Date:</td>
-        <td align="left">
-          <jqxDateTimeInput #endDate
-                          [width]="100" [height]="23" >
-          </jqxDateTimeInput>
-        </td>
-      </tr>
-      <tr>
-        <td align="right">Manager:</td>
-        <td align="left">
-          <jqxInput #manager
-                          [width]="100" [height]="23">
-          </jqxInput>
-        </td>
-      </tr>
-      <tr>
-        <td align="right"></td>
-        <td style="padding-top: 10px;" align="right">
-          <jqxButton style="margin-right: 5px;" (onClick)="saveBtn()">
-            Save
-          </jqxButton>
-          <jqxButton style="margin-right: 5px;" (onClick)="cancelBtn()">
-            Cancel
-          </jqxButton>
-        </td>
-      </tr>
-    </table>
+<mat-card class="example-card"    >
+  <div *ngFor=" let offre of ListOffre">
+  <mat-card-header>
+    <mat-card-title>{{offre.projectName}}</mat-card-title>
+    <mat-card-subtitle>{{offre.startDate}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{offre.projectDescription}}
+    </p>
+  </mat-card-content>
   </div>
-</jqxWindow>
--->
+</mat-card>

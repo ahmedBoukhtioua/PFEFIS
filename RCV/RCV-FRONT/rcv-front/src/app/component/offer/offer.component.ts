@@ -6,6 +6,7 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {jobOffer} from '../../models/jobOffer';
 import {JobOfferService} from "../../services/jobOffer/job-offer.service";
 import {user} from "../../models/user";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-offer',
@@ -30,9 +31,10 @@ export class OfferComponent implements OnInit {
   modifOffre: jobOffer;
   errorAdd: boolean = false;
   OneOffre: jobOffer;
+  isConnected: user;
 
 
-  constructor(private modalService: NgbModal, private router: Router, private fb: FormBuilder, private offreService: JobOfferService) {
+  constructor(private modalService: NgbModal, private router: Router, private fb: FormBuilder, private offreService: JobOfferService,private AuthService:AuthenticationService) {
 
 
   }
@@ -41,6 +43,10 @@ export class OfferComponent implements OnInit {
   ngOnInit(): void {
     this.offres = []
     this.OneOffre = new jobOffer()
+    this.AuthService.getCurrentUser(localStorage.getItem('user')).subscribe((data)=>{
+      this.isConnected=data;
+
+    }),
 
     this.offreService.getAllJobOffer().subscribe((data) => {
       this.offres = data
@@ -157,6 +163,7 @@ export class OfferComponent implements OnInit {
 
       this.errorAdd = true
     } else {*/
+   this.offre.manager=this.isConnected;
       this.offreService.addJobOffer(this.offre).subscribe(data => {
           this.errorAdd = false
           this.value = null

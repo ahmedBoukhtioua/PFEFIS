@@ -21,6 +21,16 @@ public class Reponse {
 
     private List<String> reponses;
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    private int score;
+
     public Reponse(User idUser, Quiz idQuiz, LocalDateTime date, List<String> reponses) {
         this.idUser = idUser;
         this.idQuiz = idQuiz;

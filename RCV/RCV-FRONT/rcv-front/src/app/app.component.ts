@@ -26,12 +26,10 @@ export class AppComponent implements OnInit {
     {
 
       this.isLoggedIn=true
-      console.log(this.isLoggedIn)
       this.AuthService.getCurrentUser(localStorage.getItem('user')).subscribe((data)=>{
         this.user1=data;
         this.email=data.email;
         this.iduser = data.id;
-        console.log(this.email)
       })
 
     }

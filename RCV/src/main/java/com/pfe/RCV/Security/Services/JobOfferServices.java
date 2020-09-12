@@ -79,5 +79,12 @@ public class JobOfferServices {
     public User getManager(){
         return userRepository.findByRoles(ERole.ROLE_MANAGER);
     }
+    public int getNombreOffre()
+    {
+
+       int w=  jobOfferRepository.countByValide(true);
+        System.out.println(w);
+       return w;
+    }
 
 }

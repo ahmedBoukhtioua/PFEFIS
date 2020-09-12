@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Document(collection="cv")
@@ -15,17 +16,12 @@ public class CV {
     private DivisionList divisionList;
     private float note;
     private String picture;
+    private Boolean archived;
+    private LocalDateTime date;
 
     public CV() {
     }
 
-    public CV(String id, User user, DivisionList divisionList, float note, String picture) {
-        this.id = id;
-        this.user = user;
-        this.divisionList = divisionList;
-        this.note = note;
-        this.picture = picture;
-    }
 
     public CV(User user, DivisionList divisionList, float note, String picture) {
         this.user = user;
@@ -45,6 +41,15 @@ public class CV {
         this.divisionList = divisionList;
         this.note = note;
         this.picture = picture;
+    }
+
+    public CV(User user, DivisionList divisionList, float note, String picture, Boolean archived, LocalDateTime date) {
+        this.user = user;
+        this.divisionList = divisionList;
+        this.note = note;
+        this.picture = picture;
+        this.archived = archived;
+        this.date = date;
     }
 
     public String getId() {
@@ -79,29 +84,27 @@ public class CV {
         this.picture = picture;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CV cv = (CV) o;
-        return Float.compare(cv.note, note) == 0 &&
-                Objects.equals(id, cv.id) &&
-                Objects.equals(divisionList, cv.divisionList) &&
-                Objects.equals(picture, cv.picture);
+    public User getUser() {
+        return user;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, divisionList, note, picture);
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "CV{" +
-                "id='" + id + '\'' +
-                ", divisionList=" + divisionList +
-                ", note=" + note +
-                ", picture='" + picture + '\'' +
-                '}';
+    public Boolean getArchived() {
+        return archived;
+    }
+
+    public void setArchived(Boolean archived) {
+        this.archived = archived;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }

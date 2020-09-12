@@ -11,5 +11,6 @@ public interface JobOfferRepository extends MongoRepository<JobOffer,String> {
 
     List<JobOffer> findAllByValide(boolean valide);
    List<JobOffer> findAllJobOffersByManager(User user);
+   int countByValide(boolean valide);
 
 }

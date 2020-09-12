@@ -31,12 +31,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         User candidat1 = userRepository.findById(id).orElse(null);
 
         candidat1.setEmail(candidat.getEmail());
-        candidat1.setPassword(encoder.encode(candidat.getPassword()));
+        String encrypted = encoder.encode(candidat.getPassword());
+        candidat1.setPassword(encrypted);
         candidat1.setAdress(candidat.getAdress());
         candidat1.setFName(candidat.getFName());
         candidat1.setBirthDate(candidat.getBirthDate());    
         candidat1.setPhoto(candidat.getPhoto());
-        candidat1=candidat;
         userRepository.save(candidat1);
         return candidat1;
     }

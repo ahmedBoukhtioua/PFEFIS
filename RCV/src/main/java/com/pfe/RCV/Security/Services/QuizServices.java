@@ -64,7 +64,6 @@ public class QuizServices {
     {
        Quiz quiz1 =  quizRepository.findById(id).orElse(null);
         System.out.println(quiz1);
-       quiz1.setDate(quiz.getDate());
        quiz1.setQuizName(quiz.getQuizName());
        quiz1.setQuestions(quiz.getQuestions());
       return  quizRepository.save(quiz1);

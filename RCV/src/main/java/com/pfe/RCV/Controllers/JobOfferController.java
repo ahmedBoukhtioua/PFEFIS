@@ -70,4 +70,9 @@ public class JobOfferController {
         jobOfferService.deleteJobOffer(id);
     }
 
+    @RequestMapping(method = RequestMethod.GET,value = "/nombreValide")
+    public int getNombreValide(){
+        return jobOfferService.getNombreOffre();
+    }
+
 }

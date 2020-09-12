@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Listes des cvs</h1>
+
+</div>
+<br>
+
+
+<table id="news-table" class="table tablesorter mb-5 tablesorter-default tablesorterebe97d3cffd22" role="grid" aria-labelledby="tablesorterebe97d3cffd22caption">
+    <caption id="tablesorterebe97d3cffd22caption">
+      Liste des CVs
+    </caption>
+    <thead class="cf">
+    <tr role="row" class="tablesorter-headerRow">
+      <th scope="col" class="header tablesorter-header " data-column="1" tabindex="0" role="columnheader" aria-disabled="true" aria-controls="news-table"  aria-sort="none" aria-label="Title: No sort applied, activate to apply an ascending sort" style="user-select: none;"><div class="tablesorter-header-inner"><span>Technologie</span></div></th>
+      <th scope="col" class="header  " data-column="3" tabindex="0" role="columnheader" aria-disabled="true" aria-controls="news-table"  aria-label="Category: No sort applied, activate to apply an ascending sort" style="user-select: none;"><span>Date d'ajout</span>
+      <th scope="col" class="header  " data-column="6" tabindex="0" role="columnheader" aria-disabled="true" aria-controls="news-table"  aria-label="Category: No sort applied, activate to apply an ascending sort" style="user-select: none;"><span>Etat</span>
+      <th scope="col" class="header tablesorter-header  " data-column="4" role="columnheader" aria-disabled="true" unselectable="on" aria-sort="none" aria-label="Actions: No sort applied, sorting is disabled" style="user-select: none;"><div class="tablesorter-header-inner"><span>Actions</span></div></th>
+
+    </tr>
+    </thead>
+    <tbody aria-live="polite" aria-relevant="all">
+    <tbody aria-live="polite" aria-relevant="all">
+
+    <tr role="row" *ngFor="let cv of cvs">
+
+      <td class="align-middle" width="100">{{cv.note}} </td>
+
+      <td class="align-middle">{{cv.date}}</td>
+
+      <td class="align-middle">
+        <div *ngIf= "!cv.archived">
+          <span  class="badge badge-lg badge-danger">Archivée</span>
+
+        </div>
+        <div *ngIf= "cv.archived">
+          <span  class="badge badge-lg badge-success">Valide</span>
+
+        </div>
+      </td>
+      <td>
+        <a class="icon icon-Archive"   (click)="openArchive(content1,cv.id)" ngbPopover="Cliquez ici pour archiver ce CV " triggers="mouseenter:mouseleave">
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+          </svg>
+        </a>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+
+<ng-template #content1 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" >Archivage</h4>
+    <button type="button" class="close" aria-label="Close"  (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="alert alert-danger" role="alert">Voulez-vous vraiment archiver ce Cv ?</div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modal.close('Close click')">Annuler</button>
+    <button type="button" class="btn btn-danger" (click)="archiverCv()">Archiver</button>
+  </div>
+</ng-template>
+

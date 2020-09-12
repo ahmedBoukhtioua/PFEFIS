@@ -18,6 +18,7 @@ import {RouterModule} from "@angular/router";
 import {AuthGuard} from "./helpers/auth.guard";
 import {AddQuizComponent} from "./component/quiz/add-quiz/add-quiz.component";
 import {QuizModule} from "./component/quiz/quiz.module";
+import {CvModule} from "./component/cv/cv.module";
 
 
 @NgModule({
@@ -27,9 +28,7 @@ import {QuizModule} from "./component/quiz/quiz.module";
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    AddcvComponent,
-    OfferComponent,
-
+    OfferComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +41,7 @@ import {QuizModule} from "./component/quiz/quiz.module";
     BrowserAnimationsModule,
     JobOfferModule,
     QuizModule,
+    CvModule
 
   ],
   providers: [AuthGuard],

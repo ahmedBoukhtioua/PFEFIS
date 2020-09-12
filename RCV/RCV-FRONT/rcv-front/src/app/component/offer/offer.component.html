@@ -11,7 +11,7 @@
 <div *ngIf="div1">
   <table id="news-table" class="table tablesorter mb-5 tablesorter-default tablesorterebe97d3cffd22" role="grid" aria-labelledby="tablesorterebe97d3cffd22caption">
     <caption id="tablesorterebe97d3cffd22caption">
-      Liste des offres    <a (click)="showAjout()" class="btn btn-sm btn-primary ml-3">Ajouter une offre</a>
+      Liste des offres    <button (click)="showAjout()" class="btn btn-success ">Ajouter une offre</button>
     </caption>
     <thead class="cf">
     <tr role="row" class="tablesorter-headerRow">
@@ -47,18 +47,20 @@
       </td>
       <td >
         <a  (click)="showModif(offre.idJobOffer)" ngbPopover="Cliquez ici pour modifier ce CV " triggers="mouseenter:mouseleave">
-        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-archive" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
 
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+          </svg>
 
-
-
-
-        </svg>
 
         </a>
 
-        <a class="icon icon-Archive"   (click)="openArchive(content1,offre.idJobOffer)" ngbPopover="Cliquez ici pour archiver ce CV " triggers="mouseenter:mouseleave">archiver</a>
+        <a class="icon icon-Archive"   (click)="openArchive(content1,offre.idJobOffer)" ngbPopover="Cliquez ici pour archiver ce CV " triggers="mouseenter:mouseleave">
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-archive" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M0 2a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a2.5 2.5 0 0 1-2.5 2.5h-9A2.5 2.5 0 0 1 1 12.5V5a1 1 0 0 1-1-1V2zm2 3v7.5A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5V5H2zm13-3H1v2h14V2zM5 7.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
+          </svg>
+        </a>
       </td>
 
     </tr>
@@ -117,7 +119,7 @@
         <div class="btn-toolbar  ">
           <button type="submit" name="cancel" (click)="showOffrePage()" class="btn btn-secondary mx-1">Annuler</button>
 
-          <button type="submit" name="submit" class="btn btn-primary " (click)="AjoutOffre()">Ajouter</button>
+          <button type="submit" name="submit" class="btn btn-success " (click)="AjoutOffre()">Ajouter</button>
         </div>
       </form>
     </div>
@@ -157,7 +159,7 @@
 
         <div class="btn-toolbar ">
           <button type="submit" name="cancel" (click)="showOffrePage()" class="btn btn-secondary mx-1">Annuler</button>
-          <button type="submit" name="submit" class="btn btn-primary " (click)="updateOffre(this.modifOffre.idJobOffer)">Modifier</button>
+          <button type="submit" name="submit" class="btn btn-success " (click)="updateOffre(this.modifOffre.idJobOffer)">Modifier</button>
         </div>
       </form>
     </div>
@@ -176,12 +178,7 @@
       <h4 class="col-12 modal-title text-center" id="modal-basic-title">{{OneOffre.projectName}}</h4>
       <br>
       <p><strong>Description : </strong>{{OneOffre.projectDescription}} </p>
-   <!--
-      <p ><strong>Skills  : </strong>        <span *ngFor="let skill of OneOffre.skills ">{{skill}} , </span></p>
-      <p><strong>Année d'experience : </strong>{{OneOffre.anneeExperience}}</p>
-      <p><strong>Manger : </strong>{{OneOffre.manager}}</p>
-      <p><strong>Equipe : </strong>{{OneOffre.equipe}}</p>
--->
+
 
     </div>
   </div>

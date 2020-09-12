@@ -1,5 +1,8 @@
 package com.pfe.RCV.payload.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.Set;
 
@@ -7,7 +10,16 @@ public class SignupRequest {
     private  String eNumber ;
     private  String password ;
     private String email ;
-    private String FName;
+    private String fName;
+
+    public String getfName() {
+        return fName;
+    }
+
+    public void setfName(String fName) {
+        this.fName = fName;
+    }
+
     private String adress;
     private Date birthDate;
     private Set<String> role ;
@@ -18,10 +30,10 @@ public class SignupRequest {
         this.email = email;
     }
 
-    public SignupRequest(String password, String email, String FName, String adress, Date birthDate) {
+    public SignupRequest(String password, String email, String fName, String adress, Date birthDate) {
         this.password = password;
         this.email = email;
-        this.FName = FName;
+        this.fName = fName;
         this.adress = adress;
         this.birthDate = birthDate;
     }
@@ -61,13 +73,7 @@ public class SignupRequest {
         this.email = email;
     }
 
-    public String getFName() {
-        return FName;
-    }
 
-    public void setfName(String FName) {
-        this.FName = FName;
-    }
 
     public String getAdress() {
         return adress;

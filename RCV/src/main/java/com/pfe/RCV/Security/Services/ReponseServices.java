@@ -1,6 +1,7 @@
 package com.pfe.RCV.Security.Services;
 
 import com.pfe.RCV.Controllers.AuthController;
+import com.pfe.RCV.Models.Option;
 import com.pfe.RCV.Models.Question;
 import com.pfe.RCV.Models.Reponse;
 import com.pfe.RCV.Models.User;
@@ -25,11 +26,29 @@ public class ReponseServices {
 
     public Reponse addReponse(Reponse reponse){
 
-        String id = authController.getConnectedUser().getId();
-        User user = authController.user(id);
+
+        User user = authController.user(reponse.getIdUser().getId());
         LocalDateTime date = LocalDateTime.now();
         reponse.setDate(date);
         reponse.setIdUser(user);
+        int score = 0;
+        int i = 0;
+        for (String rep: reponse.getReponses()
+             ) {
+            for (Option opt:reponse.getIdQuiz().getQuestions().get(i).getOptionList()
+                 ) {
+                if(opt.getCorrect()!= null && opt.getCorrect())
+                {
+                    if(opt.getOptionName().equals(rep))
+                    {
+                        score++;
+                    }
+                    break;
+                }
+            }
+            i++;
+        }
+        reponse.setScore(score);
         reponseRepository.save(reponse);
         return reponse;
     }

@@ -28,6 +28,7 @@ export class ProfileComponent implements OnInit {
       this.authService.getCurrentUser(localStorage.getItem('user')).subscribe(data => {
 
           this.user = data
+          console.log(this.user)
 
         },
         (err: HttpErrorResponse) => {
@@ -46,7 +47,6 @@ export class ProfileComponent implements OnInit {
 
     } else {
 
-      console.log(this.user)
       this.authService.updateProfil(id, this.user).subscribe(data => {
 
 
