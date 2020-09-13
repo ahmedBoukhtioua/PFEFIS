@@ -26,6 +26,8 @@
     "@syncfusion/ej2": "^18.2.46",
     "angular-8-datatable": "^1.0.2",
     "bootstrap": "^4.5.0",
+    "ng2-charts": "^2.3.2",
+    "chart.js": "^2.9.3",
     "jquery": "^3.5.1",
     "jqwidgets-ng": "^10.0.2",
     "ngx-spinner": "^9.0.2",

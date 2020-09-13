@@ -2,7 +2,6 @@ package com.pfe.RCV.Security.Services;
 
 import com.pfe.RCV.Models.ERole;
 import com.pfe.RCV.Models.JobOffer;
-import com.pfe.RCV.Models.Role;
 import com.pfe.RCV.Models.User;
 import com.pfe.RCV.Repository.JobOfferRepository;
 import com.pfe.RCV.Repository.UserRepository;
@@ -10,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class JobOfferServices {
@@ -79,12 +78,22 @@ public class JobOfferServices {
     public User getManager(){
         return userRepository.findByRoles(ERole.ROLE_MANAGER);
     }
-    public int getNombreOffre()
+
+
+    public ArrayList<Integer> getNombreOffre()
     {
+       int v=  jobOfferRepository.countByValide(true);
+        int a=  jobOfferRepository.countByValide(false);
+        ArrayList<Integer> nb = new ArrayList<Integer>();
+        nb.add(v);
+        nb.add(a);
 
-       int w=  jobOfferRepository.countByValide(true);
-        System.out.println(w);
-       return w;
+        return nb;
     }
+    public long getNombreAll()
+    {  long w=  jobOfferRepository.count();
 
+        return w;
+
+    }
 }

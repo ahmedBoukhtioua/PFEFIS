@@ -6,6 +6,7 @@ import com.pfe.RCV.Security.Services.JobOfferServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -71,8 +72,13 @@ public class JobOfferController {
     }
 
     @RequestMapping(method = RequestMethod.GET,value = "/nombreValide")
-    public int getNombreValide(){
+    public ArrayList<Integer> getNombreValide(){
         return jobOfferService.getNombreOffre();
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/getAllNombre")
+    public long getAllNombre(){
+        return jobOfferService.getNombreAll();
     }
 
 }

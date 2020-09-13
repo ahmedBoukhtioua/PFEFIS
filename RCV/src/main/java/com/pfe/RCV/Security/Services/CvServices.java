@@ -27,14 +27,16 @@ public class CvServices {
     @Autowired
     private StorageService storageService;
 
-    public CV addCv(DivisionList divisionList, String id_user, float note, MultipartFile file) {
+    public CV addCv(DivisionList divisionList, String id_user, float note, MultipartFile file)   {
 
         List<String> files = new ArrayList<String>();
         storageService.store(file);
         files.add(file.getOriginalFilename());
         CV cv = new CV(id_user, divisionList, note, file.getOriginalFilename());
         cvRepository.save(cv);
+
    return  cv;
+
 
     }
     public List<CV> getAll()
@@ -54,18 +56,6 @@ public class CvServices {
     }
     public CV getCv(String id){
         return cvRepository.findById(id).orElse(null);
-    }
-
-    @Test
-    public void givenPythonScriptEngineIsAvailable_whenScriptInvoked_thenOutputDisplayed() throws Exception {
-        StringWriter writer = new StringWriter();
-        ScriptContext context = new SimpleScriptContext();
-        context.setWriter(writer);
-
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByName("python");
-        engine.eval(new FileReader(resolvePythonScriptPath("hello.py")), context);
-        assertEquals("Should contain script output: ", "Hello Baeldung Readers!!", writer.toString().trim());
     }
 
 

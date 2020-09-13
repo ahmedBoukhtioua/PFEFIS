@@ -3,7 +3,7 @@
 </div>
 
 <mat-card class="example-card"    >
-  <div *ngFor=" let offre of ListOffre">
+  <div class="row-cols-3" *ngFor=" let offre of ListOffre">
   <mat-card-header>
     <mat-card-title>{{offre.projectName}}</mat-card-title>
     <mat-card-subtitle>{{offre.startDate}}</mat-card-subtitle>

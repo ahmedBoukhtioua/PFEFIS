@@ -27,13 +27,13 @@ export class AddcvComponent implements OnInit {
 
 
     this.currentFileUpload = this.selectedFiles.item(0);
-    this.uploadService.pushFileToStorage(this.currentFileUpload  , this.note).subscribe(event => {this.isSuccessful = true;
+    this.uploadService.pushFileToStorage(this.currentFileUpload,this.note).subscribe(event => {this.isSuccessful = true;
       if (event.type === HttpEventType.UploadProgress) {
         this.progress.percentage = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {
         console.log('File is completely uploaded!');
       }
-      this.router.navigate(["/quiz"])
+      //this.router.navigate(["/quiz"])
     });
 
     this.selectedFiles = undefined;

@@ -19,6 +19,7 @@ import {AuthGuard} from "./helpers/auth.guard";
 import {AddQuizComponent} from "./component/quiz/add-quiz/add-quiz.component";
 import {QuizModule} from "./component/quiz/quiz.module";
 import {CvModule} from "./component/cv/cv.module";
+import {ChartsModule} from "ng2-charts";
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import {CvModule} from "./component/cv/cv.module";
     BrowserAnimationsModule,
     JobOfferModule,
     QuizModule,
-    CvModule
+    CvModule,
+    ChartsModule
 
   ],
   providers: [AuthGuard],

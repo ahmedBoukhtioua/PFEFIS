@@ -38,12 +38,20 @@ public class StorageService {
             new Random().nextBytes(array);
             String generatedString = new String(array, Charset.forName("UTF-8"));
 
-            System.out.println(generatedString);
 
             Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+            String command = "cmd /c python C:\\Users\\hp\\PycharmProjects\\untitled\\test.py";
+            Process p = Runtime.getRuntime().exec(command);
+            System.out.println(command);
+
         } catch (Exception e) {
             throw new RuntimeException("FAIL!");
         }
+
+
+
+
+
     }
 
     public Resource loadFile(String filename) {
