@@ -57,6 +57,10 @@ public class StorageService {
             command.add("C:/Users/hp/PycharmProjects/untitled/test.py");
             executeCmd(command, new File("C:/Users/hp/PycharmProjects/untitled"));
 
+            CV myobject = new ObjectMapper().readValue(new File("C:/Users/hp/PycharmProjects/untitled/data.json"), CV.class);
+            System.out.println("objet:"+ myobject);
+
+
         } catch (Exception e) {
             throw new RuntimeException("FAIL!");
         }
