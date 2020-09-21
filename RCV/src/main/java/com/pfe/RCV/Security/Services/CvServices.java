@@ -27,7 +27,7 @@ public class CvServices {
     @Autowired
     private StorageService storageService;
 
-    public CV addCv(DivisionList divisionList, String id_user, float note, MultipartFile file)   {
+    public CV addCv(DivisionList divisionList, String id_user, float note, MultipartFile file)  {
 
         List<String> files = new ArrayList<String>();
         storageService.store(file);
@@ -58,6 +58,21 @@ public class CvServices {
         return cvRepository.findById(id).orElse(null);
     }
 
+    public ArrayList<Integer> getNombreCv()
+    {
+        int v=  cvRepository.countByArchived(true);
+        int a= cvRepository.countByArchived(false);
+        ArrayList<Integer> nb = new ArrayList<Integer>();
+        nb.add(v);
+        nb.add(a);
 
+        return nb;
+    }
+    public long getNombreAllCV()
+    {  long w=  cvRepository.count();
+
+        return w;
+
+    }
 }
 

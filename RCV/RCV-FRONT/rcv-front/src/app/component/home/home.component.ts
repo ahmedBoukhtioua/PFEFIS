@@ -5,6 +5,7 @@
   import {Router,NavigationEnd} from "@angular/router";
   import {JobOfferService} from "../../services/jobOffer/job-offer.service";
   import {HttpErrorResponse} from "@angular/common/http";
+  import {CvService} from "../../services/cv/cv.service";
   @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -15,13 +16,16 @@
     public type: ChartType = 'line';
     public doughnutChartLabels = [];
     public doughnutChartData = [];
+    public doughnutChartDataCV = [];
     public doughnutChartType = 'doughnut';
-    public labels: Label[] = ['Archivé', 'Valide']
 
     public datasets: ChartDataSets[] = []
 
 
     public datasetOffre: ChartDataSets[] = []
+    public datasetCV: ChartDataSets[] = []
+
+
 
     public options: ChartOptions = {
       legend: {
@@ -32,9 +36,10 @@
     showPieOffre: boolean = false;
 
     allCount = []
+    allCountCv = []
     OffreValide= [];
 
-    constructor(private authService:AuthenticationService, private router: Router, private offreService: JobOfferService) {
+    constructor(private cvService:CvService, private router: Router, private offreService: JobOfferService) {
       this.navigationSubscription = this.router.events.subscribe((e: any) => {
         // If it is a NavigationEnd event re-initalise the component
         if (e instanceof NavigationEnd) {
@@ -50,6 +55,15 @@
       }, (err) => {
       })
       this.pieOffre()
+      this.cvService.getNombreCVAll().subscribe((data) => {
+        this.allCountCv = data
+
+      }, (err) => {
+      })
+      this.pieCV()
+
+
+
     }
 
 
@@ -64,12 +78,37 @@
       this.datasetOffre = [{
         data: this.doughnutChartData,
         backgroundColor: [
-          'rgba(38,0,242,0.99)',
-          'rgb(250,0,10)',
+          'rgba(57,255,43,0.99)',
+          'rgb(169,169,169)',
         ],
         borderColor: [
-          'rgb(38,0,242)',
-          'rgb(250,0,10)',
+          'rgb(57,255,43)',
+          'rgb(169,169,169)',
+        ],
+        borderWidth: 1
+      }];
+
+
+
+
+    }
+    pieCV() {
+
+      this.doughnutChartLabels = ['Valide','Archivé']
+
+      this.cvService.getNombreCVValide().subscribe((data)=>{
+        this.doughnutChartDataCV=data
+      },(err)=>{})
+
+      this.datasetCV = [{
+        data: this.doughnutChartDataCV,
+        backgroundColor: [
+          'rgba(57,255,43,0.99)',
+          'rgb(169,169,169)',
+        ],
+        borderColor: [
+          'rgb(57,255,43)',
+          'rgb(169,169,169)',
         ],
         borderWidth: 1
       }];

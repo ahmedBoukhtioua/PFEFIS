@@ -1,5 +1,7 @@
 package com.pfe.RCV.Security.Services;
 
+import com.pfe.RCV.Models.ERole;
+import com.pfe.RCV.Models.Role;
 import com.pfe.RCV.Models.User;
 import com.pfe.RCV.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -40,4 +44,25 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userRepository.save(candidat1);
         return candidat1;
     }
+    public ArrayList<Integer> getNombreUser()
+    {
+        int m=  userRepository.countByRoles(ERole.ROLE_MANAGER);
+        int r=  userRepository.countByRoles(ERole.ROLE_RH);
+        int c=  userRepository.countByRoles(ERole.ROLE_CANDIDAT);
+
+        ArrayList<Integer> nb = new ArrayList<Integer>();
+        nb.add(m);
+        nb.add(r);
+        nb.add(c);
+
+        return nb;
+    }
+    public long getNombreAllUser()
+    {  long w=  userRepository.count();
+
+        return w;
+
+    }
+
+
 }

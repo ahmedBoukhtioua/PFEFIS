@@ -25,7 +25,7 @@ export class AddcvComponent implements OnInit {
   }
   uploadfile() {
 
-
+    this.note=10;
     this.currentFileUpload = this.selectedFiles.item(0);
     this.uploadService.pushFileToStorage(this.currentFileUpload,this.note).subscribe(event => {this.isSuccessful = true;
       if (event.type === HttpEventType.UploadProgress) {

@@ -4,11 +4,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Document(collection="cv")
-public class CV {
+public class CV implements Serializable {
     @Id
     private String id;
     @DBRef
@@ -107,4 +108,6 @@ public class CV {
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
+
+
 }

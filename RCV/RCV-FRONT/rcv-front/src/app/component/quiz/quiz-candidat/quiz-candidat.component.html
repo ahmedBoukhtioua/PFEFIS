@@ -1,12 +1,14 @@
 
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Reponse Quiz {{quiz.quizName}}</h1>
+  <h1 class="h2">Reponse Quiz</h1>
 
 </div>
 
 
 <br>
 <form>
+  <div>
+    <h1 class ="h2">  {{quiz.quizName}} </h1>
 <div *ngFor="let question of quiz.questionsList;">
 
 
@@ -34,7 +36,10 @@
   </div>
 
 </div>
+
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" (click)="submit()">Submit</button>
+  </div>
+
   </div>
 </form>

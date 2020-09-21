@@ -41,4 +41,12 @@ export class AuthenticationService {
     console.log(id);
     return this.http.put<user>(AUTH_API + `updateUser/` + id,profil);
   }
+  getNombreUser(): Observable<any> {
+    return this.http.get<any>(AUTH_API + `nombreUser`);
+  }
+  g
+  getNombreAll(): Observable<any> {
+    return this.http.get<any>(AUTH_API + `getAllNombreUser`);
+  }
+
 }

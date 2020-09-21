@@ -23,6 +23,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -135,5 +136,14 @@ public class AuthController {
     public void updateProf(@PathVariable String id, @RequestBody User candidat){
 
         userimpl.updateProfil(id, candidat);
+    }
+    @RequestMapping(method = RequestMethod.GET,value = "/nombreUser")
+    public ArrayList<Integer> getNombreUser(){
+        return userimpl.getNombreUser();
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/getAllNombreUser")
+    public long getAllNombreUser(){
+        return userimpl.getNombreAllUser();
     }
 }

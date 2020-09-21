@@ -169,14 +169,17 @@
       <h4 class="col-12 modal-title text-center" id="modal-basic-title">{{oneQuiz.quizName}}</h4>
       <br>
       <p><strong>Date : </strong>{{oneQuiz.date}} </p>
-      <!--
-         <p ><strong>Skills  : </strong>        <span *ngFor="let skill of OneOffre.skills ">{{skill}} , </span></p>
-         <p><strong>Année d'experience : </strong>{{OneOffre.anneeExperience}}</p>
-         <p><strong>Manger : </strong>{{OneOffre.manager}}</p>
-         <p><strong>Equipe : </strong>{{OneOffre.equipe}}</p>
-   -->
+
+      <div *ngFor="let question of this.oneQuiz.questionsList,let index = index">
+        <div class="form-group" >
+          <label  for="inputQuestion" class="is-required"> <strong>question{{index+1}}:</strong> {{question.question}} </label>
+        </div>
+        <div class="form-group" *ngFor="let option of question.optionList,let index =index">
+          <label  for="inputQuestion" class="is-required"> <strong>option{{index+1}}: </strong>{{option.optionName}}</label>
+        </div>
 
     </div>
+  </div>
   </div>
 
   <div class="modal-footer">
@@ -189,13 +192,13 @@
 <!--ici le modal Suppression -->
 <ng-template #content1 let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" >Suppression</h4>
+    <h4 class="modal-title" >Archivage</h4>
     <button type="button" class="close" aria-label="Close"  (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <div class="alert alert-danger" role="alert">Voulez-vous vraiment archiver cette offre d'emploi ?</div>
+    <div class="alert alert-danger" role="alert">Voulez-vous vraiment archiver ce quiz ?</div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal" (click)="modal.close('Close click')">Annuler</button>

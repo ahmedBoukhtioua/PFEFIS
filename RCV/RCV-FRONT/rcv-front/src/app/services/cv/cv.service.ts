@@ -45,4 +45,11 @@ archivedCv(id: string,cv: cv ): Observable<cv> {
   getCvById(id : string): Observable<cv> {
     return this.http.get<cv>(`${this.baseUrl}` + `api/cv/findById/`+ `${id}`);
   }
+  getNombreCVValide(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}` + `api/cv/nombreCvValide`);
+  }
+
+  getNombreCVAll(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}` + `api/cv/getAllNombreCV`);
+  }
 }

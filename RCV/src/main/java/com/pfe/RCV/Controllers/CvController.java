@@ -1,21 +1,18 @@
 package com.pfe.RCV.Controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pfe.RCV.Models.CV;
-import com.pfe.RCV.Models.DivisionList;
-import com.pfe.RCV.Models.JobOffer;
-import com.pfe.RCV.Models.Quiz;
+
 import com.pfe.RCV.Repository.CvRepository;
 import com.pfe.RCV.Security.Services.CvServices;
 import com.pfe.RCV.Storage.StorageService;
-import org.python.core.io.BufferedWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedReader;
-import java.io.FileWriter;
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,7 +48,6 @@ public class CvController {
 
             cvRepository.save(cv);
 
-
             return ResponseEntity.status(HttpStatus.OK).body(message);
 
         } catch (Exception e) {
@@ -81,5 +77,17 @@ public class CvController {
     public CV getById(@PathVariable String id){
         return cvServices.getCv(id);
     }
+
+
+    @RequestMapping(method = RequestMethod.GET,value = "/nombreCvValide")
+    public ArrayList<Integer> getNombreValide(){
+        return cvServices.getNombreCv();
+    }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/getAllNombreCV")
+    public long getAllNombre(){
+        return cvServices.getNombreAllCV();
+    }
+
 
 }

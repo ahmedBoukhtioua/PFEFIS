@@ -25,4 +25,6 @@ public interface UserRepository extends MongoRepository <User,String> {
     User  findByRoles(ERole role);
 
     boolean existsByRoles(Role role);
+
+    int countByRoles(ERole role);
 }

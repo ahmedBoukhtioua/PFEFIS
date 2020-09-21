@@ -12,5 +12,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 public interface CvRepository extends MongoRepository<CV,String> {
 
     CV findByUser(User user);
+    int countByArchived(Boolean archived);
 
 }

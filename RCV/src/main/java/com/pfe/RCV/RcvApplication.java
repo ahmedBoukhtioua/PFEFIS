@@ -11,9 +11,6 @@ import java.util.List;
 @SpringBootApplication
 public class RcvApplication {
 
-	public void givenPythonScript_whenPythonProcessInvoked_thenSuccess() throws Exception {
-
-	}
 	public static void main(String[] args) {
 		SpringApplication.run(RcvApplication.class, args);
 
