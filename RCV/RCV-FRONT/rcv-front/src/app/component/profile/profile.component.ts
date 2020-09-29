@@ -38,7 +38,7 @@ export class ProfileComponent implements OnInit {
   }
 
   update(id) {
-    if (this.user.birthDate === null || this.user.email == "" || this.user.FName === "" || this.user.adress === "" ) {
+    if (this.user.birthDate === null || this.user.email == "" || this.user.fname === "" || this.user.adress === "" ) {
 
 
       this.EmptyField = true;

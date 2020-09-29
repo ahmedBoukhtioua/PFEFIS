@@ -178,6 +178,8 @@
       <h4 class="col-12 modal-title text-center" id="modal-basic-title">{{OneOffre.projectName}}</h4>
       <br>
       <p><strong>Description : </strong>{{OneOffre.projectDescription}} </p>
+      <p><strong>Manager : </strong>{{OneOffre.manager.fname}} </p>
+      <p *ngFor="let cv of cvs"><strong>Matché avec : </strong>{{cv.user.fname}} </p>
 
 
     </div>

@@ -12,8 +12,7 @@ import {user} from "./models/user";
 export class AppComponent implements OnInit {
   private roles: string[];
   isLoggedIn = false;
-  showAdminBoard = false;
-  showModeratorBoard = false;
+
   email: string;
   iduser:string;
   user1: user;
@@ -30,37 +29,19 @@ export class AppComponent implements OnInit {
         this.user1=data;
         this.email=data.email;
         this.iduser = data.id;
+
+        console.log(this.user1.roles[0].name)
+        if(this.user1.roles[0].name==="ROLE_RH"|| this.user1.roles[0].name==='ROLE_MANAGER')
+         {
+           localStorage.setItem('isManager','true')
+        }
+        else {
+
+          localStorage.setItem('isManager','false')
+     }
       })
 
     }
-
-
-
-    /*this.isLoggedIn = !!this.tokenStorageService.getToken();
-
-    if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-      this.roles = user.roles;
-
-      //this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
-     // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
-      this.eNumber = user.eNumber;*/
-      // if(this.roles[0]==="ROLE_RH"|| this.roles[0]==='ROLE_MANAGER')
-      // {
-      //   localStorage.setItem('isManager','true')
-      //
-      //
-      // }
-      // else {
-      //
-      //   localStorage.setItem('isManager','false')
-      //
-      // }
-
-
-
-
   }
 
   logout(){
@@ -71,7 +52,7 @@ export class AppComponent implements OnInit {
   }
   isManager()
   {
-    if (this.user1.roles[0]==="ROLE_RH"||this.user1.roles[0]==="ROLE_MANAGER"){
+    if (localStorage.getItem('isManager')==="true"){
       return true
 
     }

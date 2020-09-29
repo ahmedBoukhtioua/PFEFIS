@@ -1,17 +1,16 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 pb-2 mb-3 border-bottom">
-  <h1 class="h2">Listes des offre</h1>
+  <h1 class="h2">Liste des offres</h1>
 </div>
 
-<mat-card class="example-card"    >
-  <div class="row-cols-3" *ngFor=" let offre of ListOffre">
-  <mat-card-header>
-    <mat-card-title>{{offre.projectName}}</mat-card-title>
-    <mat-card-subtitle>{{offre.startDate}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      {{offre.projectDescription}}
-    </p>
-  </mat-card-content>
+
+<div class="row">
+  <div class="col-md-4"*ngFor=" let offre of ListOffre" >
+    <div class="card">
+      <div class="card-body text-white bg-success" >
+        <h2 class="card-title">{{offre.projectName}}</h2>
+        <h3 class="card-subtitle"> {{offre.startDate | date: 'dd/MM/yyyy'}}  </h3>
+        <p class="card-text">{{offre.projectDescription}}</p>
+      </div>
+    </div>
   </div>
-</mat-card>
+</div>

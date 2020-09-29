@@ -33,7 +33,7 @@ export class AddcvComponent implements OnInit {
       } else if (event instanceof HttpResponse) {
         console.log('File is completely uploaded!');
       }
-      //this.router.navigate(["/quiz"])
+      this.router.navigate(["/quiz"])
     });
 
     this.selectedFiles = undefined;

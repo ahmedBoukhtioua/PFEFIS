@@ -70,7 +70,7 @@
       <div *ngIf="errorAdd" class="form-label-group">
         <div  class="alert alert-danger" role="alert">Veuillez remplir tous les champs</div>
       </div>
-      <form    role="form" >
+
 
         <div *ngFor="let question of this.quiz.questionsList,let index = index">
           <div class="form-group" >
@@ -84,7 +84,7 @@
 
         <div class="form-group">
           <label for="inputQuestion" class="is-required">questions</label>
-          <input type="text" class="form-control"   [(ngModel)]="this.questionToAdd.question" >
+          <input type="text" class="form-control"   [(ngModel)]="this.questionToAdd.question" [ngModelOptions]="{standalone: true}">
         </div>
         <div class="form-group" *ngFor="let option of this.questionToAdd.optionList,let index = index">
           <label for="inputQuestion" class="is-required">Option {{index+1}}: </label>
@@ -93,9 +93,9 @@
         </div>
         <div class="btn-toolbar  ">
 
-          <button  name="submit" class="btn btn-success " (click)="AjoutQuestion()">Ajouter Question</button>
+          <input type="button"  class="btn btn-success " (click)="AjoutQuestion()" value="Ajouter Question">
         </div>
-
+      <form    role="form" >
         <div class="form-group">
           <label for="inputName" class="is-required">Nom du quiz</label>
           <input type="text" class="form-control" id="inputName" required="" name="nom" [(ngModel)]="this.quiz.quizName">

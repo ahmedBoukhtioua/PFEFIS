@@ -27,7 +27,7 @@ public class CvServices {
     @Autowired
     private StorageService storageService;
 
-    public CV addCv(DivisionList divisionList, String id_user, float note, MultipartFile file)  {
+    public CV addCv(List<String> divisionList, String id_user, float note, MultipartFile file)  {
 
         List<String> files = new ArrayList<String>();
         storageService.store(file);

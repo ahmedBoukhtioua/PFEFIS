@@ -7,10 +7,11 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Email;
+import java.io.Serializable;
 import java.util.*;
 
 @Document(collection = "users")
-public class User {
+public class User implements Serializable {
 
     @Id
     private String  id;

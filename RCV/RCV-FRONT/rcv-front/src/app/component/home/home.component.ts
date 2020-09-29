@@ -1,10 +1,7 @@
   import { Component, OnInit } from '@angular/core';
   import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-  import {  Label } from 'ng2-charts';
-  import {AuthenticationService} from "../../services/authentication.service";
   import {Router,NavigationEnd} from "@angular/router";
   import {JobOfferService} from "../../services/jobOffer/job-offer.service";
-  import {HttpErrorResponse} from "@angular/common/http";
   import {CvService} from "../../services/cv/cv.service";
   @Component({
     selector: 'app-home',

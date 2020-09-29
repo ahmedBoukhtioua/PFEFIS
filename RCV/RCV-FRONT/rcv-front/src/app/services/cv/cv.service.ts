@@ -13,16 +13,18 @@ import {cv} from "../../models/Cv";
 })
 export class CvService {
   private baseUrl = 'http://localhost:8181/';
-  constructor(private http: HttpClient,private AuthService: AuthenticationService) { }
+  constructor(private http: HttpClient,private AuthService: AuthenticationService) {
 
-  user1: user;
-  pushFileToStorage(file: File, note): Observable<HttpEvent<{}>> {
-    const formdata: FormData = new FormData();
     this.AuthService.getCurrentUser(localStorage.getItem('user')).subscribe((data)=>{
       this.user1=data;
       this.user1.id = data.id;
 
-    }),
+    })
+  }
+
+  user1: user;
+  pushFileToStorage(file: File, note): Observable<HttpEvent<{}>> {
+    const formdata: FormData = new FormData();
     formdata.append('file', file);
     formdata.append('note', note);
     const req = new HttpRequest('POST', this.baseUrl + 'api/cv/addcv/' + this.user1.id, formdata, {

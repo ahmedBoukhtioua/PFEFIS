@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {jobOffer} from "../../models/jobOffer";
 import {user} from '../../models/user';
 import {Observable} from "rxjs";
+import {cv} from "../../models/Cv";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -58,7 +59,7 @@ export class JobOfferService {
     return this.http.get(`${this.baseUrl}` + `/findAllConnected/` + manager);
   }
 
-  deleteJobOffer(id: String): Observable<jobOffer> {
+  deleteJobOffer(id: string): Observable<jobOffer> {
     return this.http.delete<jobOffer>(`${this.baseUrl}` + `/supprimerJobOffer/` + `${id}`);
   }
 
@@ -69,5 +70,9 @@ export class JobOfferService {
   getNombreAll(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}` + `/getAllNombre `);
   }
+  getMatchedCv(id: string): Observable<cv[]> {
+    return this.http.get<cv[]>(`${this.baseUrl}` + `/getMatchedCvs/`+ id);
+  }
 
 }
+

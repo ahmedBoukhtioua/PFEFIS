@@ -49,7 +49,6 @@ public closeResult: string;
 
   }
   archiverCv() {
-  console.log(this.OneCv);
     if(this.OneCv.archived == false)
     {this.cvservice.archivedCv(this.OneCv.id, this.OneCv).subscribe((data) => {
         window.location.reload()
@@ -82,6 +81,24 @@ public closeResult: string;
     } else {
       return `with: ${reason}`;
     }
+  }
+  public openDetails(content, id) {
+
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${ListCvComponent.getDismissReason(reason)}`;
+    });
+    this.cvservice.getCvById(id).subscribe(data => {
+
+
+        this.OneCv = data
+
+
+      },
+      err => {
+      });
+
   }
 
 }

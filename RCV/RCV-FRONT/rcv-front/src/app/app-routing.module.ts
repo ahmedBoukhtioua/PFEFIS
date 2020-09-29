@@ -19,17 +19,14 @@ const routes: Routes = [
 
   { path: 'home', component: HomeComponent,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")} },
   { path: 'addcv', component: AddcvComponent,canActivate:[AuthGuard]  },
-  { path: 'login', component: LoginComponent  },
+  { path: 'login', component: LoginComponent,canActivate:[AuthGuard]   },
   { path: 'addQuiz', component: AddQuizComponent,data: { roles: localStorage.getItem("isManager")}  },
-  { path: 'register', component: RegisterComponent},
+  { path: 'register', component: RegisterComponent,canActivate:[AuthGuard] },
   { path: 'profile', component: ProfileComponent,canActivate:[AuthGuard] },
-  { path: 'addJobOffer', component: AddJobOfferComponent,canActivate:[AuthGuard]  },
   { path: 'listJobOffer', component: ListJobOfferComponent,canActivate:[AuthGuard] },
-  { path: 'archivedJobOffer', component: ArchivedJobOfferComponent,canActivate:[AuthGuard] },
   { path: 'offer', component: OfferComponent ,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")} },
   { path: 'quiz', component: QuizCandidatComponent ,canActivate:[AuthGuard] },
-  { path: 'addcv', component: AddcvComponent ,canActivate:[AuthGuard] },
-  { path: 'listcv', component: ListCvComponent ,canActivate:[AuthGuard] },
+  { path: 'listcv', component: ListCvComponent ,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")} },
   { path: '', redirectTo: 'home',canActivate:[AuthGuard], pathMatch: 'full' }
 
 

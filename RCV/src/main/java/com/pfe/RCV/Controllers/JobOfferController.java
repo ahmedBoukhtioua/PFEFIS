@@ -1,7 +1,9 @@
 package com.pfe.RCV.Controllers;
 
+import com.pfe.RCV.Models.CV;
 import com.pfe.RCV.Models.JobOffer;
 import com.pfe.RCV.Models.User;
+import com.pfe.RCV.Models.test;
 import com.pfe.RCV.Security.Services.JobOfferServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -81,4 +83,9 @@ public class JobOfferController {
         return jobOfferService.getNombreAll();
     }
 
+    @RequestMapping(method = RequestMethod.GET,value = "/getMatchedCvs/{id}")
+    public List<CV> getMatchedCvs(@PathVariable String id)
+    {
+        return jobOfferService.getMatchedCvs(id);
+    }
 }

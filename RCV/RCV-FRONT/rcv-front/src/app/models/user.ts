@@ -1,7 +1,7 @@
 import {jobOffer} from './jobOffer';
 export class user{
  id : string;
- FName: string;
+ fname: string;
  email: string;
  adress: string;
   birthDate: Date;
@@ -10,6 +10,6 @@ export class user{
   jobOfferList: jobOffer;
   eNumber: string;
   password:string;
-  roles=[]
+  roles = [];
 
 }

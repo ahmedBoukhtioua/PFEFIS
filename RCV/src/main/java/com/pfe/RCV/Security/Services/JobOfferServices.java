@@ -1,8 +1,10 @@
 package com.pfe.RCV.Security.Services;
 
+import com.pfe.RCV.Models.CV;
 import com.pfe.RCV.Models.ERole;
 import com.pfe.RCV.Models.JobOffer;
 import com.pfe.RCV.Models.User;
+import com.pfe.RCV.Repository.CvRepository;
 import com.pfe.RCV.Repository.JobOfferRepository;
 import com.pfe.RCV.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,8 @@ public class JobOfferServices {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private CvRepository cvRepository;
     @Autowired
     private JobOfferRepository jobOfferRepository;
 
@@ -95,5 +99,31 @@ public class JobOfferServices {
 
         return w;
 
+    }
+
+    public List<CV> getMatchedCvs(String id )
+    {
+        JobOffer offer = jobOfferRepository.findById(id).orElse(null);
+        List<CV> result = new ArrayList<>();
+        for (CV cv : cvRepository.findAll()
+             ) {
+            boolean match = false;
+            for (String division : cv.getDivisionList()
+            ) {
+                for (String langue : cv.getLanguesList()
+                ) {
+                if (offer.getProjectDescription().contains(division) && offer.getProjectDescription().contains(langue) && cv.getNote()>=5
+                ) {
+                    match = true;
+                    break;
+                }
+            }
+        }
+            if(match)
+            {
+                result.add(cv);
+            }
+        }
+        return result;
     }
 }

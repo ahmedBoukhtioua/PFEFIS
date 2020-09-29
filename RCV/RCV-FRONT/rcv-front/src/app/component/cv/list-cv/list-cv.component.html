@@ -24,10 +24,10 @@
 
     <tr role="row" *ngFor="let cv of cvs">
 
-      <td class="align-middle" width="100">{{cv.picture}} </td>
+      <td class="align-middle" width="100"><a  (click)="openDetails(content,cv.id)" ngbPopover="Cliquez pour voir plus de détails" triggers="mouseenter:mouseleave"><strong>{{cv.picture}}</strong></a></td>
       <td class="align-middle" width="100">{{cv.note}} </td>
 
-      <td class="align-middle">{{cv.date}}</td>
+      <td class="align-middle">{{cv.date  | date: 'dd/MM/yyyy'}}</td>
 
       <td class="align-middle">
         <div *ngIf= "!cv.archived">
@@ -51,6 +51,29 @@
     </tbody>
   </table>
 
+<!--ici le modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-content border">
+
+    <div class="modal-body">
+      <h4 class="col-12 modal-title text-center" id="modal-basic-title">{{OneCv.date | date: 'dd/MM/yyyy'}}</h4>
+      <br>
+      <p><strong>Compétences : </strong>{{OneCv.divisionList}} </p>
+      <p><strong>Candidat : </strong>{{OneCv.user.fname}} </p>
+
+
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
 
 <ng-template #content1 let-modal>
   <div class="modal-header">

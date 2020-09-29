@@ -7,6 +7,7 @@ import {jobOffer} from '../../models/jobOffer';
 import {JobOfferService} from "../../services/jobOffer/job-offer.service";
 import {user} from "../../models/user";
 import {AuthenticationService} from "../../services/authentication.service";
+import {cv} from "../../models/Cv";
 
 @Component({
   selector: 'app-offer',
@@ -32,6 +33,7 @@ export class OfferComponent implements OnInit {
   errorAdd: boolean = false;
   OneOffre: jobOffer;
   isConnected: user;
+  cvs : Array<cv> = [];
 
 
   constructor(private modalService: NgbModal, private router: Router, private fb: FormBuilder, private offreService: JobOfferService,private AuthService:AuthenticationService) {
@@ -105,24 +107,28 @@ export class OfferComponent implements OnInit {
 
 
   public openDetails(content, id) {
-
+  this.cvs = []
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${OfferComponent.getDismissReason(reason)}`;
     });
+
     this.offreService.getJobOfferById(id).subscribe(data => {
 
 
       this.OneOffre = data
-      this.offreService.getJobOfferByUser(this.OneOffre.manager).subscribe((data) => {
-        this.OneOffre.manager.FName
-      }, (error) => {
-      })
+    },
 
-    }, err => {
-    });
-  }
+      err => {
+      });
+    this.offreService.getMatchedCv(id).subscribe(data =>{
+        this.cvs = data
+      },
+
+      err => {
+      });
+    }
 
   public openArchive(content, id) {
 
@@ -136,6 +142,7 @@ export class OfferComponent implements OnInit {
 
 
       this.OneOffre = data
+
 
 
     }, err => {

@@ -3,6 +3,9 @@ package com.pfe.RCV.Controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pfe.RCV.Models.CV;
 
+import com.pfe.RCV.Models.DivisionList;
+import com.pfe.RCV.Models.Skills;
+import com.pfe.RCV.Models.test;
 import com.pfe.RCV.Repository.CvRepository;
 import com.pfe.RCV.Security.Services.CvServices;
 import com.pfe.RCV.Storage.StorageService;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +50,19 @@ public class CvController {
 
             cv.setDate(date);
 
+            ObjectMapper mapper = new ObjectMapper();
+            test test = null;
+            try {
+                test = mapper.readValue(new File("upload-dir/data.json"), test.class);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.out.println(test.getSkills());
+            System.out.println(test.getLangue());
+            cv.setDivisionList(test.getSkills());
+            cv.setLanguesList(test.getLangue());
             cvRepository.save(cv);
+
 
             return ResponseEntity.status(HttpStatus.OK).body(message);
 
@@ -88,6 +104,9 @@ public class CvController {
     public long getAllNombre(){
         return cvServices.getNombreAllCV();
     }
+
+
+
 
 
 }

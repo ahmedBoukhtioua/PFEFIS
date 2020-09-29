@@ -1,10 +1,13 @@
 package com.pfe.RCV.Storage;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pfe.RCV.Models.CV;
 import com.pfe.RCV.Models.DivisionList;
 import com.pfe.RCV.Models.Skills;
+import com.pfe.RCV.Models.test;
 import com.pfe.RCV.Repository.CvRepository;
+import org.bson.json.JsonParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +60,6 @@ public class StorageService {
             command.add("C:/Users/hp/PycharmProjects/untitled/test.py");
             executeCmd(command, new File("C:/Users/hp/PycharmProjects/untitled"));
 
-            CV myobject = new ObjectMapper().readValue(new File("C:/Users/hp/PycharmProjects/untitled/data.json"), CV.class);
-            System.out.println("objet:"+ myobject);
 
 
         } catch (Exception e) {
@@ -68,6 +69,8 @@ public class StorageService {
 
 
     }
+
+
     private void executeCmd(final List<String> cmd, final File folder)
             throws IOException {
         System.out.println("Executing : " + cmd);

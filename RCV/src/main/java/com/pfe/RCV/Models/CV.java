@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Document(collection="cv")
@@ -14,7 +15,8 @@ public class CV implements Serializable {
     private String id;
     @DBRef
     private User user;
-    private DivisionList divisionList;
+    private List<String> divisionList;
+    private List<String> languesList;
     private float note;
     private String picture;
     private Boolean archived;
@@ -24,7 +26,7 @@ public class CV implements Serializable {
     }
 
 
-    public CV(User user, DivisionList divisionList, float note, String picture) {
+    public CV(User user, List<String> divisionList, float note, String picture) {
         this.user = user;
         this.divisionList = divisionList;
         this.note = note;
@@ -37,20 +39,21 @@ public class CV implements Serializable {
         this.picture = picture;
     }
 
-    public CV(String id, DivisionList divisionList, float note, String picture) {
+    public CV(String id, List<String> divisionList, float note, String picture) {
         this.id = id;
         this.divisionList = divisionList;
         this.note = note;
         this.picture = picture;
     }
 
-    public CV(User user, DivisionList divisionList, float note, String picture, Boolean archived, LocalDateTime date) {
+    public CV(User user, List<String> divisionList, float note, String picture, Boolean archived, LocalDateTime date, List<String> languesList) {
         this.user = user;
         this.divisionList = divisionList;
         this.note = note;
         this.picture = picture;
         this.archived = archived;
         this.date = date;
+        this.languesList = languesList;
     }
 
     public String getId() {
@@ -61,11 +64,11 @@ public class CV implements Serializable {
         this.id = id;
     }
 
-    public DivisionList getDivisionList() {
+    public List<String> getDivisionList() {
         return divisionList;
     }
 
-    public void setDivisionList(DivisionList divisionList) {
+    public void setDivisionList(List<String> divisionList) {
         this.divisionList = divisionList;
     }
 
@@ -109,5 +112,11 @@ public class CV implements Serializable {
         this.date = date;
     }
 
+    public List<String> getLanguesList() {
+        return languesList;
+    }
 
+    public void setLanguesList(List<String> languesList) {
+        this.languesList = languesList;
+    }
 }
