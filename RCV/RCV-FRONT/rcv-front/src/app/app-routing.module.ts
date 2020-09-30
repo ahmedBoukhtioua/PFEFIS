@@ -5,9 +5,7 @@ import {RegisterComponent} from "./component/register/register.component";
 import {LoginComponent} from "./component/login/login.component";
 import {HomeComponent} from "./component/home/home.component";
 import {AddcvComponent} from "./component/cv/addcv/addcv.component";
-import {AddJobOfferComponent} from "./component/job-offer/add-job-offer/add-job-offer.component";
 import {ListJobOfferComponent} from "./component/job-offer/list-job-offer/list-job-offer.component";
-import {ArchivedJobOfferComponent} from "./component/job-offer/archived-job-offer/archived-job-offer.component";
 import {OfferComponent} from "./component/offer/offer.component";
 import {AuthGuard} from "./helpers/auth.guard";
 import {AddQuizComponent} from "./component/quiz/add-quiz/add-quiz.component";
@@ -19,15 +17,15 @@ const routes: Routes = [
 
   { path: 'home', component: HomeComponent,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")} },
   { path: 'addcv', component: AddcvComponent,canActivate:[AuthGuard]  },
-  { path: 'login', component: LoginComponent,canActivate:[AuthGuard]   },
-  { path: 'addQuiz', component: AddQuizComponent,data: { roles: localStorage.getItem("isManager")}  },
-  { path: 'register', component: RegisterComponent,canActivate:[AuthGuard] },
+  { path: 'login', component: LoginComponent   },
+  { path: 'addQuiz', component: AddQuizComponent,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")}  },
+  { path: 'register', component: RegisterComponent},
   { path: 'profile', component: ProfileComponent,canActivate:[AuthGuard] },
   { path: 'listJobOffer', component: ListJobOfferComponent,canActivate:[AuthGuard] },
   { path: 'offer', component: OfferComponent ,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")} },
   { path: 'quiz', component: QuizCandidatComponent ,canActivate:[AuthGuard] },
   { path: 'listcv', component: ListCvComponent ,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")} },
-  { path: '', redirectTo: 'home',canActivate:[AuthGuard], pathMatch: 'full' }
+  { path: '', redirectTo: 'addcv',canActivate:[AuthGuard], pathMatch: 'full' }
 
 
 

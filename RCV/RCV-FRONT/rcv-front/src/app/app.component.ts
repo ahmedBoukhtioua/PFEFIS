@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "./services/token-storage.service";
-import {Router} from "@angular/router";
+import {NavigationEnd,Router} from "@angular/router";
 import {AuthenticationService} from "./services/authentication.service";
 import {user} from "./models/user";
 
@@ -10,27 +10,29 @@ import {user} from "./models/user";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  navigationSubscription
   private roles: string[];
-  isLoggedIn = false;
-
   email: string;
   iduser:string;
   user1: user;
   title:any;
-  constructor(private tokenStorageService: TokenStorageService,public router: Router,private AuthService :AuthenticationService) { }
+  constructor(public router: Router,private AuthService :AuthenticationService) {
+
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+    // If it is a NavigationEnd event re-initalise the component
+    if (e instanceof NavigationEnd) {
+      this.ngOnInit();
+    }
+  }); }
+
+
 
   ngOnInit() {
-    this.user1=new user()
     if(localStorage.getItem('user'))
     {
-
-      this.isLoggedIn=true
+      console.log(localStorage.getItem('user'))
       this.AuthService.getCurrentUser(localStorage.getItem('user')).subscribe((data)=>{
         this.user1=data;
-        this.email=data.email;
-        this.iduser = data.id;
-
-        console.log(this.user1.roles[0].name)
         if(this.user1.roles[0].name==="ROLE_RH"|| this.user1.roles[0].name==='ROLE_MANAGER')
          {
            localStorage.setItem('isManager','true')
@@ -47,6 +49,7 @@ export class AppComponent implements OnInit {
   logout(){
 
     localStorage.removeItem("user");
+    localStorage.removeItem("isManager")
     this.router.navigate(['/login'])
 
   }
@@ -61,4 +64,5 @@ export class AppComponent implements OnInit {
 
     }
   }
+
 }

@@ -27,8 +27,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.authService.login(this.form).subscribe(
       data => {
-
-        localStorage.setItem('user',data.id)
+        localStorage.setItem('user',data.id);
         this.router.navigate(["/offer"])
 
 

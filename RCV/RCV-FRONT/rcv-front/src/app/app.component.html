@@ -50,13 +50,13 @@
   </div>
 </div>-->
 
-<nav *ngIf="router.url != '/login' && router.url != '/register'"  role="navigation" class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-1  shadow">
+<nav *ngIf="router.url != '/login' && router.url != '/register' "  role="navigation" class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-1  shadow">
   <img src="../assets/images/FIS.png" height="40" width="200">
   <ul class="navbar-nav flex-row ml-md-auto d-md-flex align-items-center mr-3">
     <li class="nav-item dropdown" ngbPopover="Modifier votre profil" triggers="mouseenter:mouseleave" routerLink="/profile">
       <button type="button" class="nav-link btn btn-link btn-inverse  d-flex align-items-center" >
         <span class="svg-avatar mr-1" aria-hidden="true"></span>
-        <span>Bonjour <span class="text-primary">{{email}}</span></span>
+        <span>Bonjour <span class="text-primary">{{this.user1.email}}</span></span>
       </button>
 
     </li>

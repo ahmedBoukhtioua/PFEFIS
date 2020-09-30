@@ -27,8 +27,6 @@
               "src/custom-theme.scss",
               "src/styles.css",
               "./node_modules/bootstrap/dist/css/bootstrap.css",
-              "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css",
-              "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.material-green.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.js",
@@ -96,9 +94,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "./node_modules/bootstrap/dist/css/bootstrap.css",
-              "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.base.css",
-              "./node_modules/jqwidgets-ng/jqwidgets/styles/jqx.material-green.css"
+              "./node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.js",

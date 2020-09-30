@@ -21,7 +21,7 @@ public closeResult: string;
   ngOnInit(): void {
     this.cvservice.getAllCv().subscribe((data) => {
       this.cvs = data
-
+console.log(this.cvs)
     }, (err) => {
 
 

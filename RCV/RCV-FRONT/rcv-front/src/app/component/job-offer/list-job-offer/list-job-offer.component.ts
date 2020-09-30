@@ -1,13 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {jobOffer} from "../../../models/jobOffer";
 import {JobOfferService} from "../../../services/jobOffer/job-offer.service";
-import {jqxGridComponent} from "jqwidgets-ng/jqxgrid";
-import {jqxWindowComponent} from "jqwidgets-ng/jqxwindow";
-import {jqxInputComponent} from "jqwidgets-ng/jqxinput";
-import {jqxNumberInputComponent} from "jqwidgets-ng/jqxnumberinput";
-import {jqxDateTimeInputComponent} from "jqwidgets-ng/jqxdatetimeinput";
 
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-job-offer',

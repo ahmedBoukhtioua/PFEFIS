@@ -35,7 +35,7 @@ export class AuthenticationService {
     }, httpOptions);
   }
   getCurrentUser(id: string ): Observable<user> {
-    return this.http.get<user>(AUTH_API + `user/` +`${id}`);
+    return this.http.get<user>(AUTH_API + `user/` + id);
   }
   updateProfil(id: string, profil: user): Observable<user> {
     console.log(id);

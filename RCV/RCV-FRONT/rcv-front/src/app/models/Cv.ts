@@ -4,7 +4,8 @@ import {divisionList} from "./divisionList";
 export class cv{
   id: string;
   user:user;
-  divisionList: divisionList;
+  divisionList: Array<string> ;
+  languesList: Array<string> ;
   note: number;
   picture: string;
   archived: boolean;
