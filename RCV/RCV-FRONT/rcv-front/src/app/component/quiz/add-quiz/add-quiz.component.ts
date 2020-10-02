@@ -60,7 +60,7 @@ export class AddQuizComponent implements OnInit {
     this.quizService.getQuiz().subscribe((data) => {
       this.quizs = data
 
-
+console.log(this.quizs)
     }, (err) => {
 
 
@@ -234,7 +234,6 @@ export class AddQuizComponent implements OnInit {
   updateQuiz(id) {
 
     this.quizService.updateQuiz(id,this.modifQuiz).subscribe((data) => {
-
       this.errorAdd = true
       this.showOffrePage()
 

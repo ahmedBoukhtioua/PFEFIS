@@ -26,13 +26,13 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     this.authService.login(this.form).subscribe(
-      data => {
+        data => {
         localStorage.setItem('user',data.id);
-        this.router.navigate(["/offer"])
+
+            this.router.navigate(["/addcv"])
 
 
-      }
-    );
+      })
   }
 
   reloadPage() {

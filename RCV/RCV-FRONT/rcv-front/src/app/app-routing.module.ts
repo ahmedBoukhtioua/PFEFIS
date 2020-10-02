@@ -11,6 +11,7 @@ import {AuthGuard} from "./helpers/auth.guard";
 import {AddQuizComponent} from "./component/quiz/add-quiz/add-quiz.component";
 import {QuizCandidatComponent} from "./component/quiz/quiz-candidat/quiz-candidat.component";
 import {ListCvComponent} from "./component/cv/list-cv/list-cv.component";
+import {ReponseQuizComponent} from "./component/quiz/reponse-quiz/reponse-quiz.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'addcv', component: AddcvComponent,canActivate:[AuthGuard]  },
   { path: 'login', component: LoginComponent   },
   { path: 'addQuiz', component: AddQuizComponent,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")}  },
+  { path: 'reponseQuiz', component: ReponseQuizComponent,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")}  },
   { path: 'register', component: RegisterComponent},
   { path: 'profile', component: ProfileComponent,canActivate:[AuthGuard] },
   { path: 'listJobOffer', component: ListJobOfferComponent,canActivate:[AuthGuard] },

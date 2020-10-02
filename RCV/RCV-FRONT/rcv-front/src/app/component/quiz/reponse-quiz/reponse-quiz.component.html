@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center mt-5 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Réponse des quizs</h1>
+
+</div>
+  <table id="news-table" class="table tablesorter mb-5 tablesorter-default tablesorterebe97d3cffd22" role="grid" aria-labelledby="tablesorterebe97d3cffd22caption">
+    <caption id="tablesorterebe97d3cffd22caption">
+
+    </caption>
+    <thead class="cf">
+    <tr role="row" class="tablesorter-headerRow">
+      <th scope="col" class="header" data-column="1" tabindex="0" role="columnheader" aria-disabled="true" aria-controls="news-table"  aria-sort="none" aria-label="Title: No sort applied, activate to apply an ascending sort" style="user-select: none;"><div class="tablesorter-header-inner"><span>Nom du Quiz</span></div></th>
+      <th scope="col" class="header" data-column="2" tabindex="0" role="columnheader" aria-disabled="true" aria-controls="news-table"  aria-sort="none" aria-label="Date: No sort applied, activate to apply an ascending sort" style="user-select: none;"><div class="tablesorter-header-inner"><span>Nom du Candidat</span></div></th>
+
+      <th scope="col" class="header" data-column="3" tabindex="0" role="columnheader" aria-disabled="true" aria-controls="news-table"  aria-label="Category: No sort applied, activate to apply an ascending sort" style="user-select: none;"><span>Date </span>
+      <th scope="col" class="header" data-column="4" tabindex="0" role="columnheader" aria-disabled="true" aria-controls="news-table"  aria-label="Category: No sort applied, activate to apply an ascending sort" style="user-select: none;"><span>Note</span>
+
+    </tr>
+    </thead>
+    <tbody aria-live="polite" aria-relevant="all">
+    <tbody aria-live="polite" aria-relevant="all">
+
+    <tr role="row" *ngFor="let reponse of reponses">
+      <td class="align-middle" width="100">{{reponse.idQuiz.quizName}} </td>
+      <td class="align-middle" width="100">{{reponse.idUser.fname}} </td>
+      <td class="align-middle">{{reponse.date |  date: 'dd/MM/yyyy'}}</td>
+      <td class="align-middle" width="100">{{reponse.score}} </td>
+
+
+    </tr>
+    </tbody>
+  </table>
+

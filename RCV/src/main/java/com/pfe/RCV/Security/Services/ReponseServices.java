@@ -69,5 +69,10 @@ public class ReponseServices {
         User user = userRepository.findById(idUser).get();
         return  reponseRepository.findAllByIdUser(user);
     }
+    public List<Reponse> getAllReponse(){
+
+        return  reponseRepository.findAll();
+    }
+
 
 }

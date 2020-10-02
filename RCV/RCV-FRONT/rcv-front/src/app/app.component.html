@@ -1,54 +1,4 @@
-<!--<div id="app">
-  <nav *ngIf="router.url != '/login' && router.url != '/register'" class="navbar navbar-expand navbar-dark bg-dark">
-    <a href="#" class="navbar-brand">RCV</a>
-    <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home" *ngIf="isManager()">Home </a>
-      </li>
-      <li class="nav-item">
-        <a href="/profile" class="nav-link" *ngIf="isLoggedIn" routerLink="profile">User</a>
-      </li>
-      <li class="nav-item">
-        <a href="/addJobOffer" class="nav-link"  routerLink="addJobOffer"> add jobOffer</a>
-      </li>
-      <li class="nav-item">
-        <a href="/listJobOffer" class="nav-link"  routerLink="listJobOffer"> get jobOffer</a>
-      </li>
-      <li class="nav-item">
-        <a href="/archivedJobOffer" class="nav-link"  routerLink="archivedJobOffer"> archived jobOffer</a>
-      </li>
-      <li class="nav-item">
-        <a href="/offer" class="nav-link"  routerLink="offer"> offer</a>
-      </li>
-      <li class="nav-item">
-        <a href="/addQuiz" class="nav-link"  routerLink="addQuiz"> Ajouter Quiz</a>
-      </li>
 
-    </ul>
-
-    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-      <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-      </li>
-      <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Login</a>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item">
-        <a href="/profile" class="nav-link" routerLink="profile">{{ email }}</a>
-      </li>
-      <li class="nav-item">
-        <a href class="nav-link" (click)="logout()">LogOut</a>
-      </li>
-    </ul>
-  </nav>
-
-  <div class="container">
-    <router-outlet></router-outlet>
-  </div>
-</div>-->
 
 <nav *ngIf="router.url != '/login' && router.url != '/register' "  role="navigation" class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-1  shadow">
   <img src="../assets/images/FIS.png" height="40" width="200">
@@ -106,6 +56,11 @@
           <li class="nav-item">
           <a class="nav-link" routerLink="/listJobOffer">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>            List des offres
+          </a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" routerLink="/reponseQuiz" *ngIf="isManager()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>            List des reponses des quiz
           </a>
         </li>
 

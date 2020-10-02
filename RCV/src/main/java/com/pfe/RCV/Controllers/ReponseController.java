@@ -36,4 +36,8 @@ public class ReponseController {
     public List<Reponse> getReponseByUser(@PathVariable String id){
         return reponseServices.getReponseByUser(id);
     }
+    @RequestMapping(method = RequestMethod.GET,value = "/findAllReponse")
+    public List<Reponse> getReponseByUser(){
+        return reponseServices.getAllReponse();
+    }
 }

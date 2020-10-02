@@ -8,5 +8,6 @@ export class reponse{
   idUser:user;
   date: Date;
   reponses : Array<string>;
+  score: number;
 
 }

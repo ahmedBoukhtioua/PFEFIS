@@ -4,8 +4,6 @@ import {Observable} from "rxjs";
 import {quiz} from "../../models/quiz";
 import {user} from "../../models/user";
 import {reponse} from "../../models/Reponse";
- import {jobOffer} from "../../models/jobOffer";
-import {AuthenticationService} from "../authentication.service";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -62,5 +60,7 @@ export class QuizService {
   getReponseByUser(id:string) : Observable<Object> {
     return this.http.get<reponse>(`${this.baseUrl1}` + `/findReponseOfUser/` + id);
   }
+  getReponseAll(): Observable<reponse[]> {
+    return this.http.get<reponse[]>(`${this.baseUrl1}` + `/findAllReponse`)};
 
 }

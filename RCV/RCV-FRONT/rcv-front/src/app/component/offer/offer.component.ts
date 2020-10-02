@@ -16,13 +16,9 @@ import {cv} from "../../models/Cv";
 })
 export class OfferComponent implements OnInit {
 
-  public skills = [];
   public managers : user;
   offres: Array<jobOffer> = []
-  // maps the local data column to fields property
-  public localFields: Object = {text: 'Name', value: 'Name'};
-  // set the placeholder to MultiSelect Dropdown input element
-  public localWaterMark: string = 'Choisir skills';
+
   div1: boolean;
   div2: boolean;
   div3: boolean;
