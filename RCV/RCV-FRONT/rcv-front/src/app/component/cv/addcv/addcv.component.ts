@@ -22,6 +22,11 @@ export class AddcvComponent implements OnInit {
   constructor( private uploadService: CvService ,private router: Router,private AuthService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.AuthService.getCurrentUser(localStorage.getItem('user')).subscribe((data)=>{
+      this.isConnected=data;
+
+    })
+
   }
   uploadfile() {
 
@@ -33,7 +38,16 @@ export class AddcvComponent implements OnInit {
       } else if (event instanceof HttpResponse) {
         console.log('File is completely uploaded!');
       }
-      this.router.navigate(["/quiz"])
+      if(localStorage.getItem('isManager')==="true"){
+        this.router.navigate(["/home"])
+
+      }
+      else
+      {
+        this.router.navigate(["/quiz"])
+
+      }
+
     });
 
     this.selectedFiles = undefined;

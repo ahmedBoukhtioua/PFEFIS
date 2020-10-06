@@ -46,7 +46,7 @@ export class OfferComponent implements OnInit {
 
     }),
 
-    this.offreService.getAllJobOffer().subscribe((data) => {
+    this.offreService.getJobOfferByUser(localStorage.getItem('user')).subscribe((data) => {
       this.offres = data
 
     }, (err) => {
@@ -71,12 +71,6 @@ export class OfferComponent implements OnInit {
   }
 
   showAjout(){
-
-     this.offreService.getManager().subscribe((data)=>{
-       this.managers=data
-     },(err)=>{
-
-     });
 
 
      this.div1=false;

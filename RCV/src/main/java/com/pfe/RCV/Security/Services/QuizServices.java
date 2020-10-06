@@ -85,6 +85,10 @@ public class QuizServices {
         quizRepository.deleteById(id);
     }
 
+    public List<Quiz> getAllByUser(String idUser) {
+        User user = userRepository.findById(idUser).get();
+        return quizRepository.findAllByIdRh(user);
+    }
 
 
 

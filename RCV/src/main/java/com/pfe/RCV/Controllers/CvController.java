@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -53,7 +54,9 @@ public class CvController {
             ObjectMapper mapper = new ObjectMapper();
             test test = null;
             try {
-                test = mapper.readValue(new File("upload-dir/data.json"), test.class);
+                TimeUnit.SECONDS.sleep(20);
+
+                test = mapper.readValue(new File("C:/Users/hp/PycharmProjects/untitled/data.json"), test.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }

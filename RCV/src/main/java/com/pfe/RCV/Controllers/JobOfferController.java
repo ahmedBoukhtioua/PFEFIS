@@ -40,8 +40,9 @@ public class JobOfferController {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET,value = "/findAllConnected")
-    public List<JobOffer> getAllUser(User user){
+    @RequestMapping(method = RequestMethod.GET,value = "/findAllConnected/{user}")
+    public List<JobOffer> getAllUser(@PathVariable String user){
+
         return jobOfferService.getAllByUser(user);
     }
 

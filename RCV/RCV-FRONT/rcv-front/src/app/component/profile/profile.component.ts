@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
     } else {
 
       this.authService.updateProfil(id, this.user).subscribe(data => {
+          this.router.navigate(["/listJobOffer"])
 
 
         },

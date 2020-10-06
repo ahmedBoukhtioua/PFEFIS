@@ -57,7 +57,7 @@ export class AddQuizComponent implements OnInit {
       this.isConnected=data;
 
     }),
-    this.quizService.getQuiz().subscribe((data) => {
+    this.quizService.getQuizByManager(localStorage.getItem('user')).subscribe((data) => {
       this.quizs = data
 
 console.log(this.quizs)

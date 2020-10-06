@@ -17,7 +17,7 @@ ListOffre: jobOffer[];
 
 
   ngOnInit(): void {
-    this.jobOfferService.getAllJobOffer().subscribe(
+    this.jobOfferService.getJobOfferValide().subscribe(
       data => {
         this.ListOffre =data;
 

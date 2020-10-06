@@ -55,8 +55,8 @@ export class JobOfferService {
     return this.http.put<jobOffer>(`${this.baseUrl}` + `/validate/` + id, jobOffer);
   }
 
-  getJobOfferByUser(manager: user): Observable<Object> {
-    return this.http.get(`${this.baseUrl}` + `/findAllConnected/` + manager);
+  getJobOfferByUser(manager: string): Observable<jobOffer[]> {
+    return this.http.get<jobOffer[]>(`${this.baseUrl}` + `/findAllConnected/` + manager);
   }
 
   deleteJobOffer(id: string): Observable<jobOffer> {

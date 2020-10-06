@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent,canActivate:[AuthGuard] },
   { path: 'listJobOffer', component: ListJobOfferComponent,canActivate:[AuthGuard] },
   { path: 'offer', component: OfferComponent ,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")} },
-  { path: 'quiz', component: QuizCandidatComponent ,canActivate:[AuthGuard] },
+  { path: 'quiz', component: QuizCandidatComponent ,canActivate:[AuthGuard]},
   { path: 'listcv', component: ListCvComponent ,canActivate:[AuthGuard],data: { roles: localStorage.getItem("isManager")} },
   { path: '', redirectTo: 'addcv',canActivate:[AuthGuard], pathMatch: 'full' }
 

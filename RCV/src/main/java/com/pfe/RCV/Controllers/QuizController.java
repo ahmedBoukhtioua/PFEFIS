@@ -69,4 +69,10 @@ public class QuizController {
     {
         quizServices.deleteQuiz(id);
     }
+
+    @RequestMapping(method = RequestMethod.GET,value = "/findAllConnected/{user}")
+    public List<Quiz> getAllUser(@PathVariable String user){
+
+        return quizServices.getAllByUser(user);
+    }
 }

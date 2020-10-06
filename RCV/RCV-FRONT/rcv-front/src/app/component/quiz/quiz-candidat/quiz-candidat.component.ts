@@ -27,7 +27,7 @@ export class QuizCandidatComponent implements OnInit {
       this.isConnected=data;
 
     }),
-      this.quizService.getQuiz().subscribe(
+      this.quizService.getQuizVisible().subscribe(
         data=>
         {
           this.quizs = data;
@@ -57,4 +57,10 @@ export class QuizCandidatComponent implements OnInit {
   {
     this.reponse.reponses.push(value);
   }
+
+  isManager() {
+    return localStorage.getItem("user") === "true";
+  }
+
+
 }

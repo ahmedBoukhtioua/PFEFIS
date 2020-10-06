@@ -75,8 +75,9 @@ public class JobOfferServices {
         jobOffer.setValide(false);
         jobOfferRepository.save(jobOffer);
     }
-         public List<JobOffer> getAllByUser(User u) {
-        return jobOfferRepository.findAllJobOffersByManager(u);
+         public List<JobOffer> getAllByUser(String idUser) {
+             User user = userRepository.findById(idUser).get();
+             return jobOfferRepository.findAllJobOffersByManager(user);
     }
     public void deleteJobOffer(String id){jobOfferRepository.deleteById(id);}
     public User getManager(){
