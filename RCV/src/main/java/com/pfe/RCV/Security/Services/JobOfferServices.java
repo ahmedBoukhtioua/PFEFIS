@@ -27,11 +27,8 @@ public class JobOfferServices {
 
     public JobOffer addJobOffer(JobOffer jobOffer){
 
-        Date startDate = new Date();
-        Date endDate = new Date();
+
         LocalDateTime addDate = LocalDateTime.now();
-        jobOffer.setStartDate(startDate);
-        jobOffer.setEndDate(endDate);
         jobOffer.setAddDate(addDate);
         jobOffer.setValide(true);
         jobOfferRepository.save(jobOffer);

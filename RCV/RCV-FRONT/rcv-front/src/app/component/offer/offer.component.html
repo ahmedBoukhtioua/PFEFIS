@@ -86,6 +86,14 @@
           <label for="inputEmail" class="is-required">Description</label>
           <textarea  class="form-control" id="inputEmail"  required="" name="projectdescription" [(ngModel)]="this.offre.projectDescription"></textarea>
         </div>
+        <div class="form-group has-warning">
+          <label for="inputDateDebut" class="is-required">Date début</label>
+          <input type="date" class="form-control" id="inputDateDebut"  required="" name="dateDébut" [(ngModel)]="this.offre.startDate">
+        </div>
+        <div class="form-group has-warning">
+          <label for="inputDateEnd" class="is-required">Date Fin</label>
+          <input type="date" class="form-control" id="inputDateEnd"  required="" name="dateFin" [(ngModel)]="this.offre.endDate">
+        </div>
         <div class="btn-toolbar  ">
           <button type="submit" name="cancel" (click)="showOffrePage()" class="btn btn-secondary mx-1">Annuler</button>
 

@@ -154,13 +154,12 @@ export class OfferComponent implements OnInit {
 
   AjoutOffre() {
 
-    // this.offre.skills=this.value
 
-   /* if (!this.offre.skills || !this.offre.manager || !this.offre.equipe) {
+    if (!this.offre.projectName || !this.offre.projectDescription || !this.offre.startDate || !this.offre.endDate) {
 
       this.errorAdd = true
-    } else {*/
-   this.offre.manager=this.isConnected;
+    } else {
+      this.offre.manager = this.isConnected;
       this.offreService.addJobOffer(this.offre).subscribe(data => {
           this.errorAdd = false
           this.value = null
@@ -182,7 +181,7 @@ export class OfferComponent implements OnInit {
         });
     }
 
-
+  }
 
   /*setReplyTypeValue() {
 
