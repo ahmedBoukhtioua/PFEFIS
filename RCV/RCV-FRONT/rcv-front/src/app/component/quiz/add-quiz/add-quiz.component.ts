@@ -167,30 +167,31 @@ console.log(this.quizs)
 
     // this.offre.skills=this.value
 
-    /* if (!this.offre.skills || !this.offre.manager || !this.offre.equipe) {
+    if (!this.quiz.quizName) {
 
-       this.errorAdd = true
-     } else {*/
-     this.quiz.idRh=this.isConnected;
-    this.quizService.addQuiz(this.quiz).subscribe(data => {
-        this.errorAdd = false;
-        this.value = null;
-
-
-        setTimeout(() => {
-          this.ngOnInit()
-        }, 2000)
-      },
-      (err: HttpErrorResponse) => {
-        if (err.status === 422) {
-          console.log(err)
-
-          this.errorAdd = true
-
-        }
+      this.errorAdd = true
+    } else {
+      this.quiz.idRh = this.isConnected;
+      this.quizService.addQuiz(this.quiz).subscribe(data => {
+          this.errorAdd = false;
+          this.value = null;
 
 
-      });
+          setTimeout(() => {
+            this.ngOnInit()
+          }, 2000)
+        },
+        (err: HttpErrorResponse) => {
+          if (err.status === 422) {
+            console.log(err)
+
+            this.errorAdd = true
+
+          }
+
+
+        });
+    }
   }
 
 
