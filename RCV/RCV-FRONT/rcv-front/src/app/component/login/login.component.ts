@@ -29,7 +29,15 @@ export class LoginComponent implements OnInit {
         data => {
         localStorage.setItem('user',data.id);
 
+          if(localStorage.getItem('isManager')==="true"){
+            this.router.navigate(["/home"])
+
+          }
+          else
+          {
             this.router.navigate(["/addcv"])
+
+          }
 
 
       })
