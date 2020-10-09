@@ -13,17 +13,17 @@ export class AppComponent implements OnInit {
   navigationSubscription
   private roles: string[];
   email: string;
-  iduser:string;
   user1: user;
   title:any;
   constructor(public router: Router,private AuthService :AuthenticationService) {
-
+    this.user1 = new user();
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
     // If it is a NavigationEnd event re-initalise the component
     if (e instanceof NavigationEnd) {
       this.ngOnInit();
     }
-  }); }
+  });
+  }
 
 
 

@@ -44,6 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         userRepository.save(candidat1);
         return candidat1;
     }
+
     public ArrayList<Integer> getNombreUser()
     {
         int m=  userRepository.countByRoles(ERole.ROLE_MANAGER);

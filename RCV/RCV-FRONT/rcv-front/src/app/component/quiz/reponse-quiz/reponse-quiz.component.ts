@@ -16,6 +16,7 @@ export class ReponseQuizComponent implements OnInit {
   constructor(private modalService: NgbModal, private router: Router, private fb: FormBuilder, private quizService: QuizService ) { }
 
   ngOnInit(): void {
+
     this.quizService.getReponseAll().subscribe((data) => {
       this.reponses = data
 

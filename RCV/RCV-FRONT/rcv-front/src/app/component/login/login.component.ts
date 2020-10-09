@@ -28,7 +28,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.form).subscribe(
         data => {
         localStorage.setItem('user',data.id);
-
           if(localStorage.getItem('isManager')==="true"){
             this.router.navigate(["/home"])
 
@@ -40,7 +39,9 @@ export class LoginComponent implements OnInit {
           }
 
 
+
       })
+
   }
 
   reloadPage() {

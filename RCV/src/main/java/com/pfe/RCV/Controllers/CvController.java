@@ -1,11 +1,8 @@
 package com.pfe.RCV.Controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.pfe.RCV.Models.CV;
+import com.pfe.RCV.Models.*;
 
-import com.pfe.RCV.Models.DivisionList;
-import com.pfe.RCV.Models.Skills;
-import com.pfe.RCV.Models.test;
 import com.pfe.RCV.Repository.CvRepository;
 import com.pfe.RCV.Security.Services.CvServices;
 import com.pfe.RCV.Storage.StorageService;
@@ -36,8 +33,8 @@ public class CvController {
 
     @Autowired
     StorageService storageService;
-    @PostMapping("/addcv/{user_id}")
-    public ResponseEntity<String> handleFileUpload(@PathVariable(value = "user_id") String id_user, @RequestParam("file") MultipartFile file  , float note ) {
+    @PostMapping("/addcv/{id}")
+    public ResponseEntity<String> handleFileUpload(@PathVariable(value = "id") String id, @RequestParam("file") MultipartFile file  , float note ) {
         {
         String message = "";
         try {
@@ -45,7 +42,12 @@ public class CvController {
             List<String> files = new ArrayList<String>();
             storageService.store(file);
             files.add(file.getOriginalFilename());
-            CV cv = new CV(authController.user(id_user), note, file.getOriginalFilename());
+            CV cv = new CV();
+            User user = authController.user(id);
+            System.out.println("zzzz"+id);
+            cv.setUser(user);
+            cv.setPicture(file.getOriginalFilename());
+            cv.setNote(note);
             cv.setArchived(false);
             LocalDateTime date = LocalDateTime.now();
 
@@ -54,9 +56,7 @@ public class CvController {
             ObjectMapper mapper = new ObjectMapper();
             test test = null;
             try {
-                TimeUnit.SECONDS.sleep(20);
-
-                test = mapper.readValue(new File("C:/Users/hp/PycharmProjects/untitled/data.json"), test.class);
+                test = mapper.readValue(new File("upload-dir/data.json"), test.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }

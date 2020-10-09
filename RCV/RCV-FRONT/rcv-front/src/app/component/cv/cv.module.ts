@@ -6,6 +6,7 @@ import { ListCvComponent } from './list-cv/list-cv.component';
 import {AddcvComponent} from "./addcv/addcv.component";
 
 import {FormsModule} from "@angular/forms";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     CvRoutingModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ]
 })
 export class CvModule { }

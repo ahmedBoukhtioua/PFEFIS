@@ -15,12 +15,15 @@ import {Router} from "@angular/router";
   styleUrls: ['./quiz-candidat.component.css']
 })
 export class QuizCandidatComponent implements OnInit {
-
-  constructor(private quizService : QuizService , private AuthService:AuthenticationService,private router: Router) { }
   quiz : quiz;
   reponse : reponse;
   quizs: quiz[];
   isConnected: user;
+
+  constructor(private quizService : QuizService , private AuthService:AuthenticationService,private router: Router) {
+    this.quiz=new quiz()
+  }
+
 
   ngOnInit(): void {
     this.AuthService.getCurrentUser(localStorage.getItem('user')).subscribe((data)=>{
@@ -36,7 +39,7 @@ export class QuizCandidatComponent implements OnInit {
           this.quiz = this.quizs[i];
           this.reponse = new  reponse();
           this.reponse.idUser=this.isConnected;
-
+          console.log(this.isConnected)
           this.reponse.idQuiz = this.quiz;
           this.reponse.reponses = [];
         }

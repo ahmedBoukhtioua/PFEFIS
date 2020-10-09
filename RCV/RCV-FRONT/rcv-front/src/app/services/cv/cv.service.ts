@@ -7,30 +7,29 @@ import {AuthenticationService} from "../authentication.service";
 import {user} from "../../models/user";
 import {jobOffer} from "../../models/jobOffer";
 import {cv} from "../../models/Cv";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CvService {
   private baseUrl = 'http://localhost:8181/';
-  constructor(private http: HttpClient,private AuthService: AuthenticationService) {
+  user1: user;
 
-    this.AuthService.getCurrentUser(localStorage.getItem('user')).subscribe((data)=>{
-      this.user1=data;
-      this.user1.id = data.id;
+  constructor(private http: HttpClient,private router: Router,private AuthService: AuthenticationService) {
 
-    })
+
   }
 
-  user1: user;
-  pushFileToStorage(file: File, note): Observable<HttpEvent<{}>> {
+  pushFileToStorage(file: File, note,id): Observable<HttpEvent<{}>> {
     const formdata: FormData = new FormData();
     formdata.append('file', file);
     formdata.append('note', note);
-    const req = new HttpRequest('POST', this.baseUrl + 'api/cv/addcv/' + this.user1.id, formdata, {
+    const req = new HttpRequest('POST', this.baseUrl + 'api/cv/addcv/' + id, formdata, {
       reportProgress: true,
       responseType: 'text'
     });
+    console.log(id)
 
     return this.http.request(req);
   }
