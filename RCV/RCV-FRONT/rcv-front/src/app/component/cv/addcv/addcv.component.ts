@@ -62,7 +62,7 @@ export class AddcvComponent implements OnInit {
       else
       {
         this.router.navigate(["/quiz"])
-
+          this.reloadPage();
       }
 
     });
@@ -72,6 +72,9 @@ export class AddcvComponent implements OnInit {
 
   selectFile(event) {
     this.selectedFiles = event.target.files;
+  }
+  reloadPage() {
+    window.location.reload();
   }
 
 

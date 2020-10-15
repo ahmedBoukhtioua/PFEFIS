@@ -88,8 +88,6 @@ console.log(this.quizs)
     },(err)=>{
 
     });
-
-
     this.div1=false;
     this.div2=true;
     this.div3=false;
@@ -120,14 +118,7 @@ console.log(this.quizs)
       this.closeResult = `Dismissed ${AddQuizComponent.getDismissReason(reason)}`;
     });
     this.quizService.getQuizById(id).subscribe(data => {
-
-
       this.oneQuiz = data
-     /* this.quizService.getJobOfferByUser(this.oneQuiz.idRh).subscribe((data) => {
-        this.oneQuiz.idRh.fName
-      }, (error) => {
-      })*/
-
     }, err => {
     });
   }
@@ -165,7 +156,6 @@ console.log(this.quizs)
 
   AjoutQuiz() {
 
-    // this.offre.skills=this.value
 
     if (!this.quiz.quizName) {
 
@@ -193,21 +183,6 @@ console.log(this.quizs)
         });
     }
   }
-
-
-
-  /*setReplyTypeValue() {
-
-    console.log(this.offre.manager)
-    this.offre.equipe=""
-    this.offreService.getEquipesByManager(this.offre.manager).subscribe((data)=>{
-      this.equipes=data
-      this.showEquipe=true
-
-    },(err)=>{})
-
-  }
-*/
   archiverQuiz() {
     console.log("ok")
   if(this.oneQuiz.visible == true){this.quizService.notVisibleQuiz(this.oneQuiz,this.oneQuiz.idQuiz).subscribe((data) => {

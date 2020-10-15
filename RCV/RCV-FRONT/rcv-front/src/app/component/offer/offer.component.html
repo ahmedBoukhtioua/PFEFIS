@@ -165,6 +165,9 @@
       <br>
       <p><strong>Description : </strong>{{OneOffre.projectDescription}} </p>
       <p><strong>Manager : </strong>{{OneOffre.manager.fname}} </p>
+      <p><strong>Date début : </strong>{{OneOffre.startDate}} </p>
+      <p><strong>Date fin : </strong>{{OneOffre.endDate}} </p>
+
       <p *ngFor="let cv of cvs"><strong>Matché avec : </strong>{{cv.user.fname}} </p>
     </div>
   </div>

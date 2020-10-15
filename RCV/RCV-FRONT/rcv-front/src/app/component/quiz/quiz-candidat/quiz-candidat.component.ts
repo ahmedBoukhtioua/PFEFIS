@@ -4,10 +4,7 @@ import {quiz} from "../../../models/quiz";
 import {reponse} from "../../../models/Reponse";
 import {AuthenticationService} from "../../../services/authentication.service";
 import {user} from "../../../models/user";
-import {ej} from "@syncfusion/ej2/dist/ej2";
-import data = ej.data;
-import {TokenStorageService} from "../../../services/token-storage.service";
-import {Router} from "@angular/router";
+import {NavigationEnd, Router} from "@angular/router";
 
 @Component({
   selector: 'app-quiz-candidat',
@@ -19,9 +16,16 @@ export class QuizCandidatComponent implements OnInit {
   reponse : reponse;
   quizs: quiz[];
   isConnected: user;
+  navigationSubscription;
 
   constructor(private quizService : QuizService , private AuthService:AuthenticationService,private router: Router) {
     this.quiz=new quiz()
+    this.navigationSubscription = this.router.events.subscribe((q: any) => {
+      // If it is a NavigationEnd event re-initalise the component
+      if (q instanceof NavigationEnd) {
+        this.ngOnInit();
+      }
+    });
   }
 
 
